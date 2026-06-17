@@ -1,0 +1,10 @@
+---
+/* Fixed chapter indicator: progress rail, chapter label, jump dots.
+   Auto-removes itself on pages with fewer than two [data-chapter] scenes. */
+---
+
+<nav class="chapter-progress" data-chapter-progress aria-label="Page chapters">
+  <span class="chapter-rail" aria-hidden="true"><i data-chapter-bar></i></span>
+  <p class="chapter-label" data-chapter-label aria-live="polite">• Hero</p>
+  <div class="chapter-dots" data-chapter-dots></div>
+</nav>

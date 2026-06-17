@@ -1,0 +1,31 @@
+{
+  "name": "the-career-insights",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
+    "check": "astro check",
+    "vr": "playwright test -c visual-regression/playwright.config.ts",
+    "vr:approve": "playwright test -c visual-regression/playwright.config.ts --update-snapshots",
+    "vr:report": "playwright show-report visual-regression/.report"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.4.1",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/archivo": "^5.2.8",
+    "@fontsource-variable/manrope": "^5.2.8",
+    "astro": "^5.12.8",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  }
+}

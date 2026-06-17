@@ -1,0 +1,101 @@
+---
+import { contactInfo, industries, solutionLinks } from "../data/site";
+import LogoMark from "./LogoMark.astro";
+import SocialLinks from "./SocialLinks.astro";
+
+const flowItems = [
+  { label: "The Career Insights.", href: "/" },
+  { label: "Solutions.", href: "/solutions" },
+  { label: "Industries.", href: "/industries" },
+  { label: "Expertise.", href: "/services" },
+  { label: "Leadership.", href: "/leadership" },
+  { label: "About.", href: "/about" },
+  { label: "Connect.", href: "/contact" }
+];
+
+const capabilityItems = [
+  ...solutionLinks.map((item) => ({ label: item.short, href: item.href })),
+  { label: "Areas of Expertise", href: "/services" }
+];
+
+const industryItems = industries.map((label) => ({ label, href: "/industries" }));
+
+/* Active-nav detection: a link is current when the path matches exactly or the
+   page lives under that section (e.g. /solutions/rpo highlights "Solutions"). */
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href: string) => {
+  const target = href.replace(/\/$/, "") || "/";
+  if (target === "/") return pathname === "/";
+  return pathname === target || pathname.startsWith(`${target}/`);
+};
+---
+
+<header class="site-header" data-header>
+  <div class="nav-bar">
+    <a class="brand" href="/" aria-label="The Career Insights home"><LogoMark /></a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="/solutions" data-mega-trigger aria-expanded="false" aria-controls="solutions-mega" class:list={{ "is-current": isCurrent("/solutions") }} aria-current={isCurrent("/solutions") ? "page" : undefined}>Solutions</a>
+      <a href="/industries" class:list={{ "is-current": isCurrent("/industries") }} aria-current={isCurrent("/industries") ? "page" : undefined}>Industries</a>
+      <a href="/services" class:list={{ "is-current": isCurrent("/services") }} aria-current={isCurrent("/services") ? "page" : undefined}>Expertise</a>
+      <a href="/leadership" class:list={{ "is-current": isCurrent("/leadership") }} aria-current={isCurrent("/leadership") ? "page" : undefined}>Leadership</a>
+      <a href="/about" class:list={{ "is-current": isCurrent("/about") }} aria-current={isCurrent("/about") ? "page" : undefined}>About</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-cta" href="/contact">Connect</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="flow-menu"
+        aria-label="Open navigation"
+      ><i></i><i></i></button>
+    </div>
+  </div>
+
+  <div class="solutions-mega" id="solutions-mega" data-mega-menu aria-hidden="true">
+    <div class="mega-inner">
+      <div class="mega-column">
+        <p>Capabilities</p>
+        <div class="mega-line"></div>
+        <ul>
+          {capabilityItems.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="mega-column">
+        <p>Industries</p>
+        <div class="mega-line"></div>
+        <ul>
+          {industryItems.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FlowMenu: fullscreen navigation with flowing marquee hover bands -->
+  <div class="flow-menu" id="flow-menu" data-mobile-menu aria-hidden="true">
+    <nav class="flow-nav" aria-label="Site navigation">
+      {flowItems.map((item, index) => (
+        <a class:list={["flow-item", { "is-current": isCurrent(item.href) }]} href={item.href} style={`--flow-i:${index}`} aria-current={isCurrent(item.href) ? "page" : undefined}>
+          <span class="flow-num" aria-hidden="true">•</span>
+          <span class="flow-label">{item.label}</span>
+          <span class="flow-arrow" aria-hidden="true">↗</span>
+          <span class="flow-band" aria-hidden="true">
+            <span class="flow-track">
+              {Array.from({ length: 8 }).map(() => <i>{item.label}<b>✦</b></i>)}
+            </span>
+          </span>
+        </a>
+      ))}
+    </nav>
+    <div class="flow-sub" aria-label="Solutions shortcuts">
+      {solutionLinks.map((item) => <a class="sub-link" href={item.href}>{item.short}</a>)}
+    </div>
+    <div class="flow-foot">
+      <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+      <a href="tel:+13022312961">{contactInfo.desk}</a>
+      <span>{contactInfo.hours}</span>
+      <div class="flow-socials"><SocialLinks /></div>
+    </div>
+  </div>
+</header>

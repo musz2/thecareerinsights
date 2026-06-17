@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TCI">
+  <rect width="64" height="64" rx="15" fill="#ffffff"/>
+  <path d="M52 8H10v42h48V15" fill="none" stroke="#d1212e" stroke-width="3.2" stroke-linejoin="miter"/>
+  <rect x="17" y="19" width="17" height="5" fill="#15151a"/>
+  <rect x="22" y="19" width="5" height="24" fill="#15151a"/>
+  <path d="M45 39a11 11 0 1 1 0-14" fill="none" stroke="#d1212e" stroke-width="5.5" stroke-linecap="butt"/>
+  <rect x="47" y="19" width="5" height="24" fill="#15151a"/>
+</svg>

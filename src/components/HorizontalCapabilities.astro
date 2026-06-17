@@ -1,0 +1,79 @@
+---
+const growthCards = [
+  {
+    title: "Career Guidance",
+    copy: "Personalized guidance for students, graduates, and professionals looking to make confident career decisions.",
+    href: "/contact"
+  },
+  {
+    title: "Technology Training",
+    copy: "Practical training in cloud, DevOps, AI, cybersecurity, SAP, and modern digital skills.",
+    href: "/services"
+  },
+  {
+    title: "Workforce Solutions",
+    copy: "Reliable staffing, recruitment support, and talent solutions for growing business teams.",
+    href: "/solutions"
+  },
+  {
+    title: "University Programs",
+    copy: "Industry-focused learning programs, workshops, and career-readiness support for institutions.",
+    href: "/services#workforce"
+  },
+  {
+    title: "Digital Transformation",
+    copy: "Support for organizations adopting cloud platforms, automation, analytics, and modern technology systems.",
+    href: "/services#cloud"
+  },
+  {
+    title: "Professional Growth",
+    copy: "A structured path for individuals to improve skills, confidence, employability, and long-term career direction.",
+    href: "/contact"
+  }
+];
+---
+
+<section class="capabilities-horizontal tci-growth-section" data-tci-growth data-cinematic-scene="capabilities">
+  <div class="shell tci-growth-layout">
+    <div class="tci-growth-copy" data-reveal>
+      <p class="eyebrow">Capability approach</p>
+      <span class="tci-growth-accent" aria-hidden="true"></span>
+      <h2 data-mask-reveal>How TCI helps people and businesses grow</h2>
+      <p>
+        We combine career guidance, technology training, staffing support, and digital transformation expertise to help professionals and organizations move forward with clarity.
+      </p>
+      <div class="tci-growth-microcopy" aria-label="TCI delivery focus">
+        <span>Guidance</span>
+        <span>Skills</span>
+        <span>Talent</span>
+        <span>Transformation</span>
+      </div>
+    </div>
+
+    <div class="tci-growth-motion" aria-hidden="true">
+      <div class="tci-growth-orbit">
+        <span></span>
+        <i></i>
+      </div>
+      <div class="tci-growth-signal">
+        <b>People</b>
+        <i></i>
+        <b>Progress</b>
+      </div>
+    </div>
+
+    <div class="tci-growth-grid" aria-label="TCI growth capabilities">
+      {growthCards.map((item, index) => (
+        <a class="tci-growth-card" href={item.href} data-growth-card style={`--i:${index}`} data-reveal>
+          <span class="tci-growth-card-index" aria-hidden="true">•</span>
+          <span class="tci-growth-card-dot" aria-hidden="true"></span>
+          <div class="tci-growth-card-body">
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
+            <small>Explore <span aria-hidden="true">↗</span></small>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

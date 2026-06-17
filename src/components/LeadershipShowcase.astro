@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import directorTie from "../assets/images/leadership-director-tie.png";
+import workforceBlue from "../assets/images/leadership-workforce-blue.png";
+import seniorManagerBlack from "../assets/images/leadership-senior-manager-black.png";
+import technicalManagerBlack from "../assets/images/leadership-technical-manager-black.png";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const leaders = [
+  {
+    image: directorTie,
+    alt: "Amaer Ahmed Khan, Director of Talent Solutions in professional business attire",
+    name: "Amaer Ahmed Khan",
+    title: "Director | Talent Solutions",
+    role: "Talent Strategy & Client Partnerships",
+    focus: "Talent Solutions",
+    copy: "Leads talent strategy, hiring solutions, client partnerships, and future-ready workforce programs aligned to long-term business growth.",
+    tags: ["Talent Strategy", "Client Success", "Hiring Direction"]
+  },
+  {
+    image: workforceBlue,
+    alt: "Shahbaz Ahmed Khan, Director of Operations and Workforce Solutions in a blue executive suit",
+    name: "Shahbaz Ahmed Khan",
+    title: "Director | Operations & Workforce Solutions",
+    role: "Business Development & Operations",
+    focus: "Head of Workforce Solutions",
+    copy: "Drives workforce planning, business development, operational execution, delivery performance, and scalable staffing partnerships.",
+    tags: ["Workforce Solutions", "Business Development", "Operations"]
+  },
+  {
+    image: seniorManagerBlack,
+    alt: "Mohammed Tameem, Senior Manager of Workforce Solutions in a black executive suit",
+    name: "Mohammed Tameem",
+    title: "Senior Manager | Workforce Solutions",
+    role: "Recruitment Delivery & Team Performance",
+    focus: "Workforce Solutions",
+    copy: "Manages day-to-day delivery, recruitment coordination, client communication, team performance, and quality candidate matching.",
+    tags: ["Delivery", "Recruitment", "Team Performance"]
+  },
+  {
+    image: technicalManagerBlack,
+    alt: "Altaf Ali, Senior Technical Manager for IT Operations in professional black business attire",
+    name: "Altaf Ali",
+    title: "Senior Technical Manager | IT Operations",
+    role: "Technical Planning & Delivery",
+    focus: "IT Operations & Delivery",
+    copy: "Leads technical planning, project delivery, and technology solution support across training, workforce, and digital initiatives.",
+    tags: ["IT Operations", "Cloud & DevOps", "Digital Delivery"]
+  }
+];
+---
+
+<section class:list={["leadership-section", compact ? "leadership-preview-section" : "leadership-team-section"]} data-cinematic-scene="leadership" data-chapter={compact ? "Leadership" : "Team"}>
+  <div class="shell leadership-section-shell">
+    <div class="leadership-section-heading" data-reveal>
+      <div>
+        <p class="eyebrow">Leadership Team</p>
+        <h2>{compact ? "The People Behind Our Workforce Vision" : "Leadership that connects strategy, talent, and execution."}</h2>
+      </div>
+      <p>{compact ? "A leadership team focused on talent strategy, workforce solutions, client success, and business growth." : "Guiding talent solutions, workforce strategy, and business growth with experience, trust, and execution."}</p>
+    </div>
+
+    <div class="leadership-grid" aria-label="The Career Insights leadership team">
+      {leaders.map((leader, index) => (
+        <article class="leadership-card" data-reveal style={`--leader-i:${index}`}>
+          <a class="leadership-image-wrap" href="/leadership" aria-label={`View leadership profile for ${leader.name}`}>
+            <Image
+              src={leader.image}
+              alt={leader.alt}
+              widths={[320, 420, 620, 760]}
+              sizes="(max-width: 760px) 88vw, (max-width: 1180px) 44vw, 540px"
+              format="webp"
+              quality={88}
+              loading="lazy"
+            />
+            <span class="leadership-image-glow" aria-hidden="true"></span>
+          </a>
+          <div class="leadership-card-body">
+            <span class="leadership-index" aria-hidden="true">•</span>
+            <h3>{leader.name}</h3>
+            <p class="leadership-title">{leader.title}</p>
+            <p class="leadership-role">{leader.role}</p>
+            <p class="leadership-focus">{leader.focus}</p>
+            <p class="leadership-copy">{leader.copy}</p>
+            <ul class="leadership-tags" aria-label="Leadership focus areas">
+              {leader.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {compact && (
+      <div class="leadership-preview-action" data-reveal>
+        <a class="button button-red" href="/leadership">Meet Our Leadership <span aria-hidden="true">↗</span></a>
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,257 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCapabilities from "../components/HorizontalCapabilities.astro";
+import ImpactDashboard from "../components/ImpactDashboard.astro";
+import WhyChooseTrust from "../components/WhyChooseTrust.astro";
+import { careerSteps, expertise, features, solutionLinks, technologyRail } from "../data/site";
+import heroTeam from "../assets/images/tci-hero-boardroom-meeting.png";
+import workforceOps from "../assets/images/tci-workforce-operations.png";
+import collaborationPlanning from "../assets/images/tci-collaboration-planning.jpg";
+import teamWorkshop from "../assets/images/tci-team-workshop.jpg";
+import boardroomConsulting from "../assets/images/tci-boardroom-consulting.png";
+import advisoryReview from "../assets/images/tci-advisory-review.png";
+import marketAnalysisPresentation from "../assets/images/tci-market-analysis-presentation.png";
+import enterpriseStrategySession from "../assets/images/tci-enterprise-strategy-session.png";
+import strategyRoadmapPresentation from "../assets/images/tci-strategy-roadmap-presentation.png";
+
+
+const strategyRailImages = [
+  { src: boardroomConsulting, alt: "TCI team discussion for career guidance, staffing, and workforce planning", label: "Career guidance & workforce planning" },
+  { src: advisoryReview, alt: "TCI consultants reviewing candidate profiles, reports, and delivery requirements", label: "Verified talent review" },
+  { src: marketAnalysisPresentation, alt: "TCI team reviewing market data, hiring trends, and growth opportunities", label: "Talent market intelligence" },
+  { src: enterpriseStrategySession, alt: "TCI advisors planning technology training, cloud, DevOps, and digital delivery", label: "Technology training strategy" },
+  { src: strategyRoadmapPresentation, alt: "TCI roadmap session for professional growth, university programs, and business outcomes", label: "Professional growth roadmap" }
+];
+
+/* Second rail runs the same imagery in reverse order and direction so the two
+   rows never sit in lockstep — purely decorative motion (announced once by
+   the first rail). */
+const strategyRailImagesAlt = [...strategyRailImages].reverse();
+---
+
+<BaseLayout title="The Career Insights | Talent Solutions and Technology Services" description="Recruitment, contingent workforce, total talent, technology, cybersecurity, cloud, SAP, analytics, and application services.">
+  <section class="home-hero" data-cinematic-scene="intro" data-chapter="Hero" data-premium-home-hero>
+    <div class="hero-photo" aria-hidden="true"><Image src={heroTeam} alt="" widths={[480, 706]} sizes="(max-width: 860px) 92vw, min(50vw, 720px)" format="webp" quality={88} loading="eager" fetchpriority="high" /></div>
+    <div class="shell home-hero-copy" data-reveal>
+      <p class="eyebrow light">Custom talent solutions for the pace of modern business</p>
+      <h1>Your Growth.<br /><em>Our Expertise.</em><br />One Talent Solution.</h1>
+      <p class="hero-lede">Verified talent, workforce solutions, and technology expertise designed to move critical work forward.</p>
+      <div class="button-row"><a class="button button-red" href="/contact">Start the conversation <span>↗</span></a><a class="button button-ghost" href="/solutions">Explore solutions</a></div>
+      <div class="hero-metrics" data-hero-metrics>
+        <article><strong data-hero-counter data-count="15" data-suffix="K+" data-decimals="0">0K+</strong><span>Professionals helped</span></article>
+        <article><strong data-hero-counter data-count="95" data-suffix="%" data-decimals="0">0%</strong><span>Success rate</span></article>
+        <article><strong data-hero-counter data-count="4.9" data-suffix="" data-decimals="1">0.0</strong><span>Average rating</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-section dotted-section" data-chapter="About">
+    <div class="shell split-intro" data-reveal>
+      <div><p class="eyebrow">Who we are</p><h2 data-mask-reveal>The Career Insights.</h2></div>
+      <div class="who-motion" data-who-motion aria-label="Animated career intelligence network">
+        <svg viewBox="0 0 560 420" role="img" aria-label="Career intelligence, workforce connections, and growth pathways">
+          <defs>
+            <linearGradient id="whoLine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d1212e"/><stop offset="1" stop-color="#2c637f"/></linearGradient>
+            <radialGradient id="whoGlow"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#d1212e" stop-opacity="0"/></radialGradient>
+          </defs>
+          <path class="who-orbit who-orbit-one" d="M78 220C150 82 342 36 466 146c74 66 54 176-46 220-110 48-283 16-342-146Z" />
+          <path class="who-orbit who-orbit-two" d="M106 286c52-128 216-204 338-132 88 52 82 166-18 214-102 50-246 24-320-82Z" />
+          <path class="who-path who-path-one" d="M90 288 C172 226 210 132 302 166 S412 242 488 122" />
+          <path class="who-path who-path-two" d="M104 150 C180 196 220 272 310 250 S420 170 486 296" />
+          <g class="who-node who-node-a"><circle cx="96" cy="288" r="9"/><text x="96" y="318">Talent</text></g>
+          <g class="who-node who-node-b"><circle cx="212" cy="152" r="7"/><text x="212" y="132">Insight</text></g>
+          <g class="who-node who-node-c"><circle cx="316" cy="252" r="11"/><text x="316" y="286">Skills</text></g>
+          <g class="who-node who-node-d"><circle cx="488" cy="122" r="8"/><text x="488" y="100">Growth</text></g>
+          <g class="who-node who-node-e"><circle cx="486" cy="296" r="7"/><text x="486" y="328">Success</text></g>
+          <circle class="who-pulse" cx="280" cy="210" r="88" />
+        </svg>
+        <div class="who-motion-caption"><span>Career Intelligence</span><strong>Human connections, technology enablement, and workforce transformation in one operating view.</strong></div>
+      </div>
+      <div class="rich-copy"><p class="lead">We begin by understanding your most critical requirements, then combine targeted database filtering with a stringent verification process.</p><p>Our shortlists are built around people who are qualified, certification-ready, and appropriately cleared, accelerating the path from need to placement. For professionals, we pair innovative technology with expert insight to create personalized guidance that drives real progress.</p><ul class="check-list"><li>Personalized guidance aligned to unique goals</li><li>Evidence-based strategies for career and workforce growth</li><li>Access to industry experts and thought leaders</li><li>Comprehensive skill development programs</li><li>Ongoing support throughout the journey</li></ul></div>
+    </div>
+  </section>
+
+
+  <section class="home-photo-story" data-cinematic-scene="collaboration" data-chapter="Collaboration">
+    <div class="shell home-photo-story-grid">
+      <div class="home-photo-story-copy" data-reveal>
+        <p class="eyebrow">How we work</p>
+        <h2>Real conversations. Clear plans. Better outcomes.</h2>
+        <p>We turn every hiring need and career goal into a clear execution plan, combining human insight, verified talent, and practical technology delivery.</p>
+        <div class="home-photo-points" aria-label="TCI working approach">
+          <span>Career clarity</span>
+          <span>Team alignment</span>
+          <span>Verified execution</span>
+        </div>
+      </div>
+      <div class="home-photo-collage" aria-label="Professional collaboration at The Career Insights">
+        <figure class="home-photo-card home-photo-card-primary" data-parallax-image data-reveal>
+          <Image src={collaborationPlanning} alt="Professionals planning a project with laptops and notes" widths={[520, 760, 980, 1280, 1600]} sizes="(max-width: 860px) 92vw, 47vw" format="webp" quality={82} loading="lazy" />
+        </figure>
+        <figure class="home-photo-card home-photo-card-secondary" data-parallax-image data-reveal>
+          <Image src={teamWorkshop} alt="A collaborative technology team working around laptops" widths={[420, 620, 820, 1100]} sizes="(max-width: 860px) 78vw, 30vw" format="webp" quality={82} loading="lazy" />
+        </figure>
+        <div class="home-photo-badge" data-reveal>
+          <span>TCI</span>
+          <strong>Human-led guidance with practical technology delivery.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-strategy-gallery home-strategy-gallery-rail-only" data-cinematic-scene="strategy-room" data-chapter="TCI Work in Motion">
+    <h2 class="sr-only">TCI career guidance, workforce solutions, technology training, and business planning in motion.</h2>
+    <div class="home-strategy-rail" aria-label="Moving TCI workplace image gallery">
+      <div class="home-strategy-track">
+        {[...strategyRailImages, ...strategyRailImages].map((image, index) => (
+          <figure class="home-strategy-rail-card" aria-hidden={index >= strategyRailImages.length ? "true" : "false"}>
+            <Image src={image.src} alt={index >= strategyRailImages.length ? "" : image.alt} widths={[360, 560, 760, 1120]} sizes="(max-width: 760px) 78vw, (max-width: 1646px) 34vw, 560px" format="webp" quality={80} loading="lazy" />
+            <figcaption>{image.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+    <div class="home-strategy-rail home-strategy-rail--reverse" aria-hidden="true">
+      <div class="home-strategy-track">
+        {[...strategyRailImagesAlt, ...strategyRailImagesAlt].map((image) => (
+          <figure class="home-strategy-rail-card">
+            <Image src={image.src} alt="" widths={[360, 560, 760, 1120]} sizes="(max-width: 760px) 78vw, (max-width: 1646px) 34vw, 560px" format="webp" quality={80} loading="lazy" />
+            <figcaption>{image.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section career-journey" data-cinematic-scene="career" data-chapter="Career Journey">
+    <div class="shell career-journey-grid">
+      <div class="career-journey-copy" data-reveal><p class="eyebrow light">Your career success partner</p><h2>Unlock your<br /><em>career potential.</em></h2><p>Discover valuable insights, expert guidance, and proven strategies to accelerate your professional growth and achieve career success.</p><div class="button-row"><a class="button button-red" href="/contact">Start your journey <span>↗</span></a><a class="button button-ghost" href="#career-features">Learn more</a></div></div>
+      <ol class="career-steps">{careerSteps.map((step) => <li data-reveal><span aria-hidden="true">•</span><p>{step}</p></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="section section-gray" data-cinematic-scene="solutions" data-chapter="Solutions">
+    <div class="shell section-heading"><div><p class="eyebrow">What we do</p><h2>Talent solutions built around your goals.</h2></div><p>Every organization has different challenges. We design flexible programs that meet the current need and scale with the business.</p></div>
+    <div class="shell mosaic-grid solutions-complete-grid">
+      {solutionLinks.map((item, index) => <a class={`mosaic-card tone-${index + 1}`} href={item.href}><span aria-hidden="true">•</span><h3>{item.short}</h3><p>{item.copy}</p><b>Explore solution ↗</b></a>)}
+      <a class="mosaic-card tone-4" href="/services"><span aria-hidden="true">•</span><h3>Areas of expertise</h3><p>Specialist capability across analytics, AI/ML, SAP, cloud, cybersecurity, workforce, public sector, university programs, and application development.</p><b>View expertise ↗</b></a>
+    </div>
+  </section>
+
+
+  <section class="workforce-story" data-cinematic-scene="workforce" data-chapter="Workforce">
+    <div class="workforce-story-image" data-parallax-image><Image src={workforceOps} alt="Recruitment specialists reviewing a verified candidate network" widths={[640, 1024, 1440, 1600]} sizes="(max-width: 800px) 100vw, 55vw" format="webp" quality={72} loading="lazy" /></div>
+    <div class="workforce-story-copy" data-reveal><p class="eyebrow light">Verified talent intelligence</p><h2>See the whole workforce. Act on the right signal.</h2><p>From candidate mapping and clearance verification to market intelligence and program governance, TCI brings human judgment and usable data into one operating view.</p><a class="button button-red" href="/solutions">Explore workforce solutions</a></div>
+  </section>
+
+  <section class="section expertise-section" data-cinematic-scene="enterprise" data-chapter="Expertise">
+    <div class="shell section-heading inverse"><div><p class="eyebrow light">TCI at a glance</p><h2>Areas of expertise.</h2></div><p>We systematically strengthen our core expertise and optimize delivery to create scalable, high-value outcomes.</p></div>
+    <div class="shell data-intelligence-showcase" aria-label="Moving enterprise expertise showcase">
+      <div class="data-track">
+        {[...expertise, ...expertise].map((item, index) => <a class="data-card" href={`/services#${item.title.toLowerCase().includes("analytics") ? "analytics" : item.title.toLowerCase().includes("sap") ? "sap" : item.title.toLowerCase().includes("cloud") ? "cloud" : item.title.toLowerCase().includes("cyber") ? "cybersecurity" : item.title.toLowerCase().includes("application") ? "applications" : "workforce"}`} aria-hidden={index >= expertise.length ? "true" : "false"}><span>{item.code}</span><h3>{item.title}</h3><p>{item.copy}</p><ul class="exp-caps" aria-label="Key capabilities">{item.capabilities.map((cap) => <li>{cap}</li>)}</ul><i>↗</i></a>)}
+      </div>
+    </div>
+  </section>
+
+  <HorizontalCapabilities />
+
+  <section class="technology-marquee" aria-label="Technology capabilities">
+    <div class="shell technology-heading"><p class="eyebrow">Technology capability</p><h2>Expertise that keeps moving.</h2></div>
+    <div class="marquee-window"><div class="technology-track">{[...technologyRail, ...technologyRail].map((item) => <div class="technology-chip"><span>{item.code}</span><strong>{item.label}</strong></div>)}</div></div>
+    <div class="marquee-window reverse"><div class="technology-track">{[...technologyRail.slice().reverse(), ...technologyRail.slice().reverse()].map((item) => <div class="technology-chip"><span>{item.code}</span><strong>{item.label}</strong></div>)}</div></div>
+  </section>
+
+  <section class="section industry-visual-section" data-cinematic-scene="industries" data-chapter="Industries" data-home-industries>
+    <div class="shell section-heading"><div><p class="eyebrow">Industries</p><h2>Industries we support.</h2></div><p>We understand the operating landscape behind the job title, then build a talent approach that supports innovation and growth.</p></div>
+    <div class="shell industry-visual-grid" aria-label="Industries served by The Career Insights">
+      {[
+        ["Life Sciences", "Finding, attracting, and retaining the right talent in pharma, medical devices, and life sciences is more complex — and more critical — than ever.", "life-sciences", true],
+        ["Financial Services", "Specialist talent for banking, insurance, compliance, analytics, and high-trust customer operations.", "financial-services", false],
+        ["Technology", "Cloud, data, application, cybersecurity, DevOps, and product teams ready for modern delivery.", "technology", false],
+        ["Manufacturing + Industrial", "Workforce strategy for manufacturing, engineering, plant operations, automation, and industrial growth.", "manufacturing", false],
+        ["Energy + Renewables", "Skilled professionals supporting utilities, renewable energy, grid modernization, and field operations.", "energy", false],
+        ["Healthcare", "Qualified healthcare, administrative, scientific, and operational talent for high-impact care environments.", "healthcare", false],
+        ["Consumer Goods (FMCG)", "In fast-moving consumer goods, success depends on speed, agility, and brand connection.", "fmcg", true],
+        ["Media + Entertainment", "Creative, technology, production, operations, and audience-growth talent for modern media teams.", "media", false]
+      ].map(([title, copy, slug, wide]) => <a class:list={["industry-visual-card", wide && "industry-card-wide"]} href="/industries" style={`--industry-bg:url('/industry/${slug}.svg')`}><span aria-hidden="true">•</span><h3>{title}</h3><p>{copy}</p><b>Learn more <span class="iv-arrow" aria-hidden="true">↗</span></b></a>)}
+    </div>
+  </section>
+
+  <section class="section feature-section" id="career-features" data-cinematic-scene="impact">
+    <div class="shell centered-heading"><p class="eyebrow light">Career success</p><h2>Powerful features for professional growth.</h2><p>Tools, resources, and expert support to help people build momentum and make informed career decisions.</p></div>
+    <div class="shell feature-grid">{features.map((feature) => <article class="feature-card"><span aria-hidden="true">•</span><h3>{feature.title}</h3><p>{feature.copy}</p></article>)}</div>
+  </section>
+
+  <ImpactDashboard />
+
+
+  <WhyChooseTrust />
+
+
+<script is:inline>
+  (() => {
+    const counters = Array.from(document.querySelectorAll("[data-hero-counter]"));
+    const metrics = document.querySelector("[data-hero-metrics]");
+    if (!counters.length || !metrics) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finalText = (el, progress = 1) => {
+      const target = Number(el.dataset.count || "0");
+      const decimals = Number(el.dataset.decimals || "0");
+      const suffix = el.dataset.suffix || "";
+      const value = target * progress;
+      return `${value.toFixed(decimals)}${suffix}`;
+    };
+
+    if (reduce) {
+      counters.forEach((el) => { el.textContent = finalText(el, 1); });
+      return;
+    }
+
+    /* Count up exactly once when the metrics enter view, then hold the final
+       value permanently. No looping/reset — that read as a broken counter. */
+    let done = false;
+    const duration = 1450;
+
+    const animate = () => {
+      const start = performance.now();
+      const tick = (now) => {
+        const raw = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - raw, 3);
+        counters.forEach((el) => { el.textContent = finalText(el, eased); });
+        if (raw < 1) requestAnimationFrame(tick);
+        else counters.forEach((el) => { el.textContent = finalText(el, 1); });
+      };
+      requestAnimationFrame(tick);
+    };
+
+    let observer;
+    const observe = () => {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !done) {
+            done = true;
+            observer.disconnect();
+            animate();
+          }
+        });
+      }, { threshold: 0.32 });
+      observer.observe(metrics);
+    };
+
+    /* Start only after the intro loader has cleared, otherwise the full
+       0 → value count runs (and finishes) behind the loader and is never seen. */
+    const loader = document.querySelector("[data-site-loader]");
+    if (loader && document.body.contains(loader)) {
+      let started = false;
+      const begin = () => { if (started) return; started = true; observe(); };
+      const mo = new MutationObserver(() => { if (!document.body.contains(loader)) { mo.disconnect(); begin(); } });
+      mo.observe(document.body, { childList: true });
+      window.setTimeout(() => { mo.disconnect(); begin(); }, 1600);
+    } else {
+      observe();
+    }
+  })();
+</script>
+</BaseLayout>

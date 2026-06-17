@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactInfo } from "../data/site";
+
+const sections = [
+  { id: "acceptance", title: "Acceptance of Terms" },
+  { id: "services", title: "Our Services" },
+  { id: "use-of-site", title: "Acceptable Use" },
+  { id: "intellectual-property", title: "Intellectual Property" },
+  { id: "third-party-links", title: "Third-Party Links" },
+  { id: "disclaimers", title: "Disclaimers" },
+  { id: "limitation-of-liability", title: "Limitation of Liability" },
+  { id: "indemnification", title: "Indemnification" },
+  { id: "governing-law", title: "Governing Law" },
+  { id: "changes", title: "Changes to These Terms" },
+  { id: "contact", title: "Contact" }
+];
+---
+
+<BaseLayout
+  title="Terms and Conditions | The Career Insights"
+  description="The terms and conditions governing use of thecareerinsights.com and The Career Insights services."
+>
+  <section class="page-hero legal-hero" data-chapter="Contact">
+    <div class="shell">
+      <p class="eyebrow light">Legal</p>
+      <h1>Terms and Conditions</h1>
+      <p>The terms that govern use of our website and services. Last updated: June 2026.</p>
+    </div>
+  </section>
+
+  <section class="section legal-section">
+    <div class="shell legal-grid">
+      <nav class="legal-toc" aria-label="Table of contents">
+        <p>On this page</p>
+        {sections.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
+      </nav>
+
+      <div class="legal-body rich-copy">
+        <p class="lead">
+          These Terms and Conditions ("Terms") govern your use of thecareerinsights.com and the
+          services provided by The Career Insights LLC ("TCI", "we", "us"). This document is
+          provided as a general template and should be reviewed by qualified legal counsel before
+          being relied upon.
+        </p>
+
+        <h2 id="acceptance">Acceptance of Terms</h2>
+        <p>By accessing or using this website, you agree to be bound by these Terms and our Privacy Policy. If you do not agree, please do not use the website.</p>
+
+        <h2 id="services">Our Services</h2>
+        <p>TCI provides career intelligence, career guidance, technology and professional training, workforce and staffing solutions, university programs, and technology services. Specific engagements may be governed by separate written agreements; where a separate agreement exists, that agreement controls for that engagement.</p>
+
+        <h2 id="use-of-site">Acceptable Use</h2>
+        <p>You agree to use the website only for lawful purposes. You may not attempt to gain unauthorized access to any systems, interfere with the website's operation, submit false or misleading information, or use the website to transmit harmful or unlawful content.</p>
+
+        <h2 id="intellectual-property">Intellectual Property</h2>
+        <p>The website and its content — including text, graphics, logos, and design — are owned by or licensed to TCI and are protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
+
+        <h2 id="third-party-links">Third-Party Links</h2>
+        <p>The website may contain links to third-party sites. TCI does not control and is not responsible for the content or practices of those sites; links are provided for convenience only.</p>
+
+        <h2 id="disclaimers">Disclaimers</h2>
+        <p>The website and its content are provided on an "as is" and "as available" basis. While we work to keep information accurate and current, we make no warranties, express or implied, regarding completeness, accuracy, reliability, or availability. Career and staffing outcomes depend on many factors and are not guaranteed.</p>
+
+        <h2 id="limitation-of-liability">Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, TCI shall not be liable for indirect, incidental, special, or consequential damages arising from your use of the website or services.</p>
+
+        <h2 id="indemnification">Indemnification</h2>
+        <p>You agree to indemnify and hold TCI harmless from claims arising out of your misuse of the website or violation of these Terms.</p>
+
+        <h2 id="governing-law">Governing Law</h2>
+        <p>These Terms are governed by the laws of the State of Delaware, United States, without regard to conflict-of-law principles, except where the law of your jurisdiction mandatorily applies.</p>
+
+        <h2 id="changes">Changes to These Terms</h2>
+        <p>We may update these Terms from time to time. The updated version will be posted on this page with a revised date. Continued use of the website after changes indicates acceptance of the updated Terms.</p>
+
+        <h2 id="contact">Contact</h2>
+        <p>
+          Questions about these Terms: Email <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>,
+          Desk <a href="tel:+13022312961">{contactInfo.desk}</a> ({contactInfo.hours}).
+          Offices: {contactInfo.usAddress.join(", ")} and {contactInfo.indiaAddress.join(", ")}.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

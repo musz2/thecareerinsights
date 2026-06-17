@@ -1,0 +1,82 @@
+---
+/* Cinematic global footer: final CTA scene, brand description, CONNECT and
+   OFFICES blocks (clickable email/phones, office cards, CTA buttons),
+   quick links, service links, legal links, E-Verified badge, animated grid
+   + light sweep background. */
+import { contactInfo, legalLinks, solutionLinks } from "../data/site";
+import LogoMark from "./LogoMark.astro";
+import TrustBadge from "./TrustBadge.astro";
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<footer class="site-footer cinematic-footer" data-cinematic-footer>
+  <div class="footer-grid-bg" aria-hidden="true"></div>
+  <div class="footer-sweep" aria-hidden="true"></div>
+
+  <div class="footer-cta shell">
+    <p>Ready to build a stronger workforce?</p>
+    <h2 data-mask-reveal>Start a conversation that moves you forward.</h2>
+    <div class="footer-cta-buttons">
+      <a class="button button-red" href={`mailto:${contactInfo.email}`}>Email Us <span aria-hidden="true">↗</span></a>
+      <a class="button button-ghost" href="tel:+13022312961">Call Desk</a>
+      <a class="button button-gold" href="/contact">Book Consultation</a>
+    </div>
+  </div>
+
+  <div class="footer-main shell">
+    <div class="footer-brand-col">
+      <a class="footer-brand" href="/" aria-label="The Career Insights home"><LogoMark /></a>
+      <p class="footer-brand-copy">
+        The Career Insights is a global career intelligence and talent solutions company —
+        connecting organizations with verified talent and helping professionals grow through
+        guidance, training, and technology expertise.
+      </p>
+      <TrustBadge size="compact" />
+    </div>
+
+    <div>
+      <p>Connect</p>
+      <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+      <a href="tel:+13022312961">Desk: {contactInfo.desk}</a>
+      <a href="tel:+13024992545">Contact: {contactInfo.mobile}</a>
+      <span>{contactInfo.hours}</span>
+      <div class="footer-socials"><SocialLinks /></div>
+    </div>
+
+    <div class="footer-offices">
+      <p>Offices</p>
+      <article class="footer-office-card">
+        <span class="footer-office-region">United States</span>
+        <span>{contactInfo.usAddress[0]}, {contactInfo.usAddress[1]}</span>
+      </article>
+      <article class="footer-office-card">
+        <span class="footer-office-region">India</span>
+        <span>{contactInfo.indiaAddress[0]}, {contactInfo.indiaAddress[1]}</span>
+      </article>
+    </div>
+
+    <div>
+      <p>Solutions</p>
+      {solutionLinks.map((item) => <a href={item.href}>{item.short}</a>)}
+      <a href="/services">Areas of expertise</a>
+      <a href="/industries">Industries</a>
+    </div>
+
+    <div>
+      <p>Company</p>
+      <a href="/about">Who we are</a>
+      <a href="/leadership">Leadership</a>
+      <a href="/about#careers">Careers</a>
+      <a href="/about#partners">Partners</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom shell">
+    <span>© {new Date().getFullYear()} The Career Insights LLC</span>
+    <span>Equal opportunity employer · E-Verified U.S. Employer</span>
+    <nav class="footer-legal" aria-label="Legal">
+      {legalLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+</footer>

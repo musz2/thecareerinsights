@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Advanced manufacturing plant">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3c332b"/><stop offset=".58" stop-color="#b68a43"/><stop offset="1" stop-color="#101419"/></linearGradient>
+    <radialGradient id="glow" cx="70%" cy="28%" r="60%"><stop offset="0" stop-color="#f0d19b" stop-opacity=".62"/><stop offset="1" stop-color="#f0d19b" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect width="1200" height="720" fill="url(#glow)" opacity=".75"/>
+  <g opacity=".26" stroke="#fff" stroke-width="2">
+    <path d="M0 520 C180 470 310 580 510 520 S820 382 1200 430" fill="none"/>
+    <path d="M0 180 C220 120 430 220 620 160 S920 72 1200 138" fill="none"/>
+  </g>
+  <g opacity=".32" fill="#fff">
+    <rect x="84" y="128" width="320" height="210" rx="18" opacity=".12"/>
+    <rect x="442" y="94" width="660" height="380" rx="20" opacity=".11"/>
+    <rect x="126" y="394" width="920" height="18" rx="9" opacity=".2"/>
+    <rect x="176" y="438" width="720" height="16" rx="8" opacity=".16"/>
+  </g>
+  <g transform="translate(640 145)" opacity=".9">
+    <circle cx="0" cy="0" r="46" fill="#fff" opacity=".16"/>
+    <rect x="-26" y="48" width="52" height="156" rx="26" fill="#fff" opacity=".18"/>
+    <circle cx="150" cy="68" r="36" fill="#fff" opacity=".14"/>
+    <rect x="128" y="108" width="44" height="136" rx="22" fill="#fff" opacity=".14"/>
+    <circle cx="-158" cy="78" r="34" fill="#fff" opacity=".12"/>
+    <rect x="-180" y="116" width="44" height="128" rx="22" fill="#fff" opacity=".12"/>
+  </g>
+  <g opacity=".22" stroke="#fff" stroke-width="1.4">
+    <path d="M320 540 L510 372 L688 474 L888 252 L1040 328" fill="none"/>
+    <circle cx="320" cy="540" r="7" fill="#fff"/><circle cx="510" cy="372" r="7" fill="#fff"/><circle cx="688" cy="474" r="7" fill="#fff"/><circle cx="888" cy="252" r="7" fill="#fff"/><circle cx="1040" cy="328" r="7" fill="#fff"/>
+  </g>
+  <g filter="url(#soft)" opacity=".25"><circle cx="960" cy="610" r="130" fill="#f0d19b"/><circle cx="160" cy="600" r="100" fill="#ffffff"/></g>
+</svg>

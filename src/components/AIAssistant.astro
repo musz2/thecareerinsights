@@ -1,0 +1,83 @@
+---
+/* AI Voice Assistant — floating glass orb + side panel (desktop) /
+   fullscreen overlay (mobile). Logic lazy-loads from ai-assistant.ts.
+   Local knowledge base only: no backend calls, no API keys. */
+---
+
+<div class="assistant" data-assistant>
+  <button
+    class="assistant-orb"
+    type="button"
+    data-assistant-orb
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    aria-label="Open the TCI assistant"
+  >
+    <span class="assistant-orb-glow" aria-hidden="true"></span>
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3a7 7 0 0 1 7 7v1a7 7 0 0 1-7 7h-1l-4 3v-4.1A7 7 0 0 1 5 11v-1a7 7 0 0 1 7-7Z"></path>
+      <circle cx="9.2" cy="10.6" r="0.9" fill="currentColor" stroke="none"></circle>
+      <circle cx="12" cy="10.6" r="0.9" fill="currentColor" stroke="none"></circle>
+      <circle cx="14.8" cy="10.6" r="0.9" fill="currentColor" stroke="none"></circle>
+    </svg>
+  </button>
+
+  <section
+    class="assistant-panel"
+    data-assistant-panel
+    role="dialog"
+    aria-modal="false"
+    aria-label="TCI assistant chat"
+    aria-hidden="true"
+  >
+    <header class="assistant-head">
+      <div class="assistant-id">
+        <span class="assistant-avatar" aria-hidden="true"><i></i></span>
+        <div>
+          <strong>TCI Assistant</strong>
+          <p class="assistant-status" data-assistant-status data-state="idle">Online</p>
+        </div>
+      </div>
+      <div class="assistant-head-controls">
+        <button class="assistant-icon-btn" type="button" data-assistant-voice aria-pressed="false" title="Voice replies off" aria-label="Toggle spoken replies">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 5 6.5 8.5H3v7h3.5L11 19V5Z"></path><path d="M15.5 8.7a4.7 4.7 0 0 1 0 6.6M18.2 6a8.4 8.4 0 0 1 0 12"></path></svg>
+        </button>
+        <button class="assistant-icon-btn" type="button" data-assistant-mute aria-pressed="false" title="Mute voice" aria-label="Mute or unmute voice">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 5 6.5 8.5H3v7h3.5L11 19V5Z"></path><path d="m16 9.5 5 5M21 9.5l-5 5"></path></svg>
+        </button>
+        <button class="assistant-icon-btn" type="button" data-assistant-stop title="Stop voice" aria-label="Stop speaking">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="7" width="10" height="10" rx="1.5"></rect></svg>
+        </button>
+        <button class="assistant-icon-btn assistant-close" type="button" data-assistant-close aria-label="Close assistant">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="assistant-wave" data-assistant-wave aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="assistant-log" data-assistant-log role="log" aria-live="polite"></div>
+
+    <div class="assistant-chips" data-assistant-chips aria-label="Quick questions"></div>
+
+    <form class="assistant-form" data-assistant-form>
+      <button class="assistant-icon-btn assistant-mic" type="button" data-assistant-mic aria-label="Ask by voice">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="9.2" y="3.5" width="5.6" height="10" rx="2.8"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"></path></svg>
+      </button>
+      <input
+        type="text"
+        data-assistant-input
+        placeholder="Ask about TCI services, training, contact…"
+        aria-label="Ask the TCI assistant a question"
+        autocomplete="off"
+        maxlength="300"
+      />
+      <button class="assistant-send" type="submit" aria-label="Send question">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 20 4l-4.5 16-3.5-6.5L4 12Z"></path></svg>
+      </button>
+    </form>
+    <p class="assistant-note">Answers cover The Career Insights only. No data leaves your browser.</p>
+  </section>
+</div>

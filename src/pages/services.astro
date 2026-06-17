@@ -1,0 +1,213 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { expertise, impactStats, serviceGroups } from "../data/site";
+import technologyOps from "../assets/images/tci-technology-operations.png";
+
+/* Mid-page flagship band: spotlight the two highest-demand practices so the
+   page isn't seven visually identical service blocks in a row. */
+const flagshipTitles = ["Analytics and AI/ML", "SAP Solutions"];
+const flagships = flagshipTitles
+  .map((title) => expertise.find((item) => item.title === title))
+  .filter((item): item is (typeof expertise)[number] => Boolean(item));
+const flagshipAnchor = (title: string) => (title.includes("Analytics") ? "analytics" : "sap");
+const flagshipStats = impactStats.slice(0, 3);
+const breakAfter = Math.floor(serviceGroups.length / 2) - 1; /* mid-page */
+---
+<BaseLayout title="Technology and Professional Services | The Career Insights" description="Analytics, AI/ML, SAP, cloud, cybersecurity, workforce, and application development services.">
+  <section class="page-hero services-hero"><div class="page-hero-photo" aria-hidden="true"><Image src={technologyOps} alt="" widths={[768, 1280, 1825]} sizes="100vw" format="webp" quality={70} loading="eager" fetchpriority="high" /></div><div class="shell"><p class="eyebrow light">TCI at a glance</p><h1>Technology expertise built to deliver.</h1><p>Specialist talent and consulting capability across the systems shaping modern business.</p></div></section>
+  <section class="section dotted-section"><div class="shell centered-heading"><p class="eyebrow">What we do</p><h2>Our areas of expertise.</h2><p>We strengthen core capability and optimize delivery to produce scalable, high-value outcomes.</p></div><div class="shell expertise-summary">{expertise.map((item) => <a href={`#${item.title.toLowerCase().includes("analytics") ? "analytics" : item.title.toLowerCase().includes("sap") ? "sap" : item.title.toLowerCase().includes("cloud") ? "cloud" : item.title.toLowerCase().includes("cyber") ? "cybersecurity" : item.title.toLowerCase().includes("application") ? "applications" : "workforce"}`}><span>{item.code}</span><h3>{item.title}</h3></a>)}</div></section>
+  {serviceGroups.map((group, groupIndex) => (
+    <Fragment>
+      <section class={`section service-group ${groupIndex % 2 ? "section-gray" : ""}`} id={group.id}><div class="shell service-heading"><p class="eyebrow">{group.eyebrow}</p><h2>{group.title}</h2><p>{group.intro}</p></div><div class="shell service-columns">{group.columns.map((column) => <article data-reveal><h3>{column.title}</h3><ul>{column.items.map((item) => <li>{item}</li>)}</ul></article>)}</div></section>
+      {groupIndex === breakAfter && (
+        <section class="services-flagship" aria-labelledby="services-flagship-title">
+          <div class="shell services-flagship-inner">
+            <div class="services-flagship-lead" data-reveal>
+              <p class="eyebrow light">Where demand runs highest</p>
+              <h2 id="services-flagship-title">Two practices carry the most weight — <em>analytics intelligence</em> and <em>enterprise SAP</em>.</h2>
+              <p>These are the engagements clients call us for first: turning raw data into decisions, and keeping core enterprise platforms steady through every upgrade, migration, and support cycle.</p>
+              <div class="services-flagship-stats">
+                {flagshipStats.map((stat) => (
+                  <div><strong>{stat.value}{stat.suffix}</strong><span>{stat.label}</span></div>
+                ))}
+              </div>
+              <a class="button button-red" href="/contact">Talk to a specialist <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="services-flagship-cards">
+              {flagships.map((item) => (
+                <a class="services-flagship-card" href={`#${flagshipAnchor(item.title)}`} data-reveal>
+                  <span class="services-flagship-code">{item.code}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                  <ul class="services-flagship-chips">{item.capabilities.map((cap) => <li>{cap}</li>)}</ul>
+                  <b>Jump to {item.title.includes("Analytics") ? "analytics" : "SAP"} <span aria-hidden="true">↗</span></b>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </Fragment>
+  ))}
+  <section class="section public-callout"><div class="shell split-intro"><div><p class="eyebrow light">Public sector and university</p><h2>Capability for mission, learning, and public impact.</h2></div><div class="rich-copy light-copy"><p class="lead">TCI supports public-sector programs, government contractors, universities, and workforce initiatives with verified talent and adaptable delivery.</p><p>Services include clearance-aware recruiting, campus programs, technical training, employability pathways, staff augmentation, project teams, and public-sector readiness.</p><a class="button button-red" href="/contact">Discuss your program</a></div></div></section>
+</BaseLayout>
+
+<style>
+  /* Flagship highlight band — a confident dark break in the otherwise
+     light/gray run of service blocks, spotlighting the two flagship practices. */
+  .services-flagship {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(72px, 9vw, 132px) 0;
+    color: #fff;
+    background:
+      radial-gradient(circle at 78% 22%, rgba(201, 35, 45, .30), transparent 30%),
+      radial-gradient(circle at 70% 78%, rgba(33, 93, 105, .34), transparent 34%),
+      linear-gradient(116deg, #04070b 0%, #0b1118 52%, #121e25 100%);
+  }
+  .services-flagship::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: repeating-linear-gradient(100deg, transparent 0 78px, rgba(255, 255, 255, .03) 79px 80px);
+    pointer-events: none;
+  }
+
+  .services-flagship-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .services-flagship-lead h2 {
+    max-width: 16ch;
+    margin: 14px 0 18px;
+    font-size: clamp(2rem, 3.4vw, 3.1rem);
+    line-height: 1.06;
+    letter-spacing: -.035em;
+    font-variation-settings: "wght" 640;
+    text-wrap: balance;
+  }
+  .services-flagship-lead h2 em {
+    font-style: normal;
+    background: linear-gradient(100deg, #f05256 18%, var(--gold) 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .services-flagship-lead > p {
+    max-width: 52ch;
+    color: rgba(255, 255, 255, .74);
+    font-size: 1.02rem;
+    line-height: 1.62;
+  }
+
+  .services-flagship-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 40px;
+    margin: 30px 0 34px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255, 255, 255, .14);
+  }
+  .services-flagship-stats div { display: flex; flex-direction: column; gap: 4px; }
+  .services-flagship-stats strong {
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    font-variation-settings: "wght" 680;
+    letter-spacing: -.04em;
+    line-height: 1;
+  }
+  .services-flagship-stats span {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .58);
+  }
+
+  .services-flagship-cards { display: grid; gap: 18px; }
+  .services-flagship-card {
+    position: relative;
+    display: block;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 18px;
+    padding: 26px 28px;
+    background: linear-gradient(165deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: inherit;
+    text-decoration: none;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), border-color .35s ease, background .35s ease;
+  }
+  .services-flagship-card:hover,
+  .services-flagship-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(240, 82, 86, .55);
+    background: linear-gradient(165deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .03));
+  }
+  .services-flagship-code {
+    display: inline-grid;
+    place-items: center;
+    min-width: 46px;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+  .services-flagship-card h3 {
+    margin: 16px 0 8px;
+    font-size: 1.3rem;
+    letter-spacing: -.02em;
+    font-variation-settings: "wght" 600;
+  }
+  .services-flagship-card > p {
+    color: rgba(255, 255, 255, .72);
+    font-size: .9rem;
+    line-height: 1.55;
+  }
+  .services-flagship-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .services-flagship-chips li {
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: rgba(255, 255, 255, .82);
+  }
+  .services-flagship-card b {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 18px;
+    color: #f05256;
+    font-size: .76rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .services-flagship-card b span { transition: transform .3s ease; }
+  .services-flagship-card:hover b span,
+  .services-flagship-card:focus-visible b span { transform: translate(3px, -3px); }
+
+  @media (max-width: 860px) {
+    .services-flagship-inner { grid-template-columns: 1fr; }
+  }
+</style>

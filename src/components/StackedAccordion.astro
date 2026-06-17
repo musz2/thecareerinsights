@@ -1,0 +1,45 @@
+---
+/* Premium stacked accordion for the solution portfolio.
+   Accessible disclosure pattern (button + aria-expanded), GSAP height
+   animation, works without JS-motion for reduced-motion users. */
+import { stackedSolutions } from "../data/site";
+---
+
+<section class="stacked-accordion-section" data-cinematic-scene="portfolio">
+  <div class="shell">
+    <div class="accordion-heading">
+      <p class="eyebrow">The portfolio</p>
+      <h2 data-mask-reveal>One partner. Every talent capability.</h2>
+    </div>
+    <div class="stacked-accordion stacked-accordion-visible">
+      {stackedSolutions.map((item, index) => (
+        <article class="accordion-item is-open" data-reveal>
+          <h3 class="accordion-title">
+            <button
+              type="button"
+              aria-expanded="true"
+              aria-controls={`accordion-panel-${index}`}
+              id={`accordion-toggle-${index}`}
+            >
+              <span class="accordion-num" aria-hidden="true">•</span>
+              <span class="accordion-text">{item.title}</span>
+              <span class="accordion-marker" aria-hidden="true"><i></i><i></i></span>
+            </button>
+          </h3>
+          <div
+            class="accordion-panel"
+            data-accordion-panel
+            id={`accordion-panel-${index}`}
+            role="region"
+            aria-labelledby={`accordion-toggle-${index}`}
+          >
+            <div class="accordion-panel-inner">
+              <p>{item.copy}</p>
+              <a class="text-link" href={item.href}>Explore this capability <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

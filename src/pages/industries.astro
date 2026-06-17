@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { industries } from "../data/site";
+const descriptions = [
+  "Digital talent for infrastructure, platforms, software, data, security, and transformation.",
+  "Cleared specialists and program talent for complex, mission-critical environments.",
+  "Verified, compliant talent for government agencies, contractors, and public programs.",
+  "Clinical, operational, technology, analytics, and support talent for evolving care systems.",
+  "Engineering, field, digital, data, and operational capability for critical infrastructure.",
+  "Campus recruitment, employability, learning programs, and workforce-ready talent pathways.",
+  "Specialized engineering, manufacturing, supply-chain, software, and technical talent.",
+  "Risk, analytics, technology, compliance, operations, and customer talent for financial firms.",
+  "Product, platform, media, telecom, cloud, data, and creative technology capability.",
+  "Engineering, automation, operations, supply-chain, quality, and digital manufacturing talent.",
+  "Creative, production, technology, data, live operations, and product specialists.",
+  "Network, cloud, security, infrastructure, customer, and transformation expertise."
+];
+---
+<BaseLayout title="Industries | The Career Insights" description="Talent strategies for technology, public sector, healthcare, energy, education, finance, manufacturing, and more.">
+  <section class="page-hero industries-hero"><div class="shell"><p class="eyebrow light">Industries</p><h1>Your industry’s challenges.<br />Our future-proof talent strategy.</h1><p>We bring sector context and flexible workforce programs to the operating realities behind every role.</p></div></section>
+  <section class="section dotted-section"><div class="shell centered-heading"><p class="eyebrow">Sector expertise</p><h2>Built for your industry and your future.</h2><p>Every industry faces different regulatory pressures, skills gaps, growth cycles, and transformation demands. TCI adapts the talent strategy to your world.</p></div><div class="shell industries-grid">{industries.map((industry, index) => <article data-reveal><span aria-hidden="true">•</span><h3>{industry}</h3><p>{descriptions[index]}</p><a href="/contact">Discuss your needs ↗</a></article>)}</div></section>
+  <section class="stat-band">
+    <strong class="sr-only">500,000+ pre-vetted profiles</strong>
+    <div class="stat-marquee" aria-hidden="true">
+      <div class="stat-marquee-track">{Array.from({ length: 12 }).map(() => <span>500,000+<i>✦</i></span>)}</div>
+    </div>
+    <div class="shell stat-band-foot"><p>Pre-vetted IT and professional profiles available through our extended talent database.</p><a class="button button-dark" href="/contact">Access the network</a></div>
+  </section>
+</BaseLayout>

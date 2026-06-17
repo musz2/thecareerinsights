@@ -1,0 +1,69 @@
+---
+/* Cinematic impact dashboard: counters, radial rings, floating analytics
+   panels, pulse dots, drawn line graph, glass depth. Values animate when
+   scrolled into view (instant for reduced-motion users). */
+import { impactStats, impactPrograms } from "../data/site";
+---
+
+<section class="impact-dashboard" data-impact-dashboard data-chapter="Impact" data-cinematic-scene="impact-dash">
+  <div class="shell">
+    <div class="impact-heading">
+      <p class="eyebrow light">Measured impact</p>
+      <h2 data-mask-reveal>Career intelligence that shows up in the numbers.</h2>
+    </div>
+
+    <div class="impact-grid">
+      {impactStats.map((stat) => (
+        <article class="impact-stat" data-float>
+          <svg class="impact-ring" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="impact-ring-track" cx="50" cy="50" r="42" />
+            <circle class="impact-ring-fill" cx="50" cy="50" r="42" data-ring={stat.ring} />
+          </svg>
+          <strong>
+            <span data-count={stat.value} data-decimals={stat.decimals} data-suffix={stat.suffix}>0</span>
+          </strong>
+          <span class="impact-label">{stat.label}</span>
+          <i class="impact-pulse" aria-hidden="true"></i>
+        </article>
+      ))}
+    </div>
+
+    <div class="impact-lower">
+      <figure class="impact-graph" data-float role="img" aria-label="Upward career growth trend line">
+        <figcaption>Career momentum</figcaption>
+        <svg viewBox="0 0 320 130" aria-hidden="true">
+          <defs>
+            <linearGradient id="impactLine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ee666d" />
+              <stop offset="1" stop-color="#d4a345" />
+            </linearGradient>
+          </defs>
+          <g class="impact-grid-lines">
+            <line x1="0" y1="32" x2="320" y2="32" />
+            <line x1="0" y1="64" x2="320" y2="64" />
+            <line x1="0" y1="96" x2="320" y2="96" />
+          </g>
+          <path
+            data-graph-line
+            d="M6 112 C 50 104, 72 92, 104 84 S 168 64, 200 52 S 270 26, 314 14"
+            fill="none"
+            stroke="url(#impactLine)"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+          <circle class="impact-graph-dot" cx="314" cy="14" r="4.5" />
+        </svg>
+      </figure>
+
+      <div class="impact-programs">
+        {impactPrograms.map((program) => (
+          <article class="impact-panel" data-float data-reveal>
+            <i class="impact-pulse" aria-hidden="true"></i>
+            <h3>{program.title}</h3>
+            <p>{program.copy}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

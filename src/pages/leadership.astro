@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LeadershipShowcase from "../components/LeadershipShowcase.astro";
+---
+
+<BaseLayout
+  title="Leadership | The Career Insights"
+  description="Meet the leadership behind The Career Insights — guiding talent solutions, workforce strategy, business development, operations, and client success."
+>
+  <section class="leadership-hero" data-cinematic-scene="leadership-hero" data-chapter="Leadership">
+    <div class="leadership-hero-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="shell leadership-hero-grid">
+      <div class="leadership-hero-copy" data-reveal>
+        <p class="eyebrow light">Leadership</p>
+        <h1>Meet the Leadership Behind The Career Insights</h1>
+      </div>
+      <div class="leadership-hero-panel" data-reveal>
+        <p>Guiding talent solutions, workforce strategy, and business growth with experience, trust, and execution.</p>
+        <div class="leadership-hero-tags" aria-label="Leadership focus">
+          <span>Talent Strategy</span>
+          <span>Workforce Solutions</span>
+          <span>Business Development</span>
+          <span>Operations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <LeadershipShowcase />
+
+  <section class="leadership-message-section" data-cinematic-scene="leadership-message" data-chapter="Leadership Message">
+    <div class="shell leadership-message-grid">
+      <div data-reveal>
+        <p class="eyebrow">Leadership Message</p>
+        <h2>Experience, trust, and execution at every stage.</h2>
+      </div>
+      <div class="leadership-message-copy" data-reveal>
+        <p>
+          At The Career Insights, our leadership team brings together experience in talent acquisition, workforce planning, business development, and professional training. We focus on helping companies find the right talent while supporting professionals in building future-ready careers.
+        </p>
+        <div class="leadership-message-points" aria-label="Leadership values">
+          <span>Client-first partnerships</span>
+          <span>Reliable delivery</span>
+          <span>Future-ready professionals</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leadership-cta-section" data-cinematic-scene="leadership-cta">
+    <div class="shell leadership-cta-card" data-reveal>
+      <div>
+        <p class="eyebrow light">Work with TCI</p>
+        <h2>Build a workforce plan with the team behind the vision.</h2>
+      </div>
+      <div class="leadership-cta-actions">
+        <a class="button button-red" href="/solutions">Explore Our Solutions <span aria-hidden="true">↗</span></a>
+        <a class="button button-ghost" href="/contact">Contact Our Team</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

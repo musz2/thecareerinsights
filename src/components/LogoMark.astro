@@ -1,0 +1,182 @@
+---
+/*
+  TCI premium animated logo.
+  Source: logo3.html supplied by the client.
+  This component namespaces every SVG id so the same animated identity can
+  render safely in the header, footer, and loading screen at the same time.
+*/
+interface Props {
+  class?: string;
+  showName?: boolean;
+}
+
+const { class: className = "" } = Astro.props;
+const uid = `tci-${Math.random().toString(36).slice(2, 10)}`;
+
+const ids = {
+  redGrad: `${uid}-redGrad`,
+  inkGrad: `${uid}-inkGrad`,
+  shine: `${uid}-shine`,
+  specGrad: `${uid}-specGrad`,
+  glow: `${uid}-glow`,
+  pglow: `${uid}-pglow`,
+  redglow: `${uid}-redglow`,
+  frame: `${uid}-p-frame`,
+  c: `${uid}-p-c`,
+  ti: `${uid}-g-ti`,
+  word: `${uid}-t-word`,
+  ink: `${uid}-ink`
+};
+---
+
+<span class:list={["tci-logo-next", className]}>
+  <svg width="0" height="0" class="tci-logo-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id={ids.redGrad} gradientUnits="userSpaceOnUse" x1="0" y1="40" x2="0" y2="240">
+        <stop offset="0" stop-color="#d8303c" />
+        <stop offset="1" stop-color="#c11b29" />
+      </linearGradient>
+      <linearGradient id={ids.inkGrad} gradientUnits="userSpaceOnUse" x1="0" y1="50" x2="0" y2="200">
+        <stop offset="0" stop-color="#26262d" />
+        <stop offset="1" stop-color="#101015" />
+      </linearGradient>
+      <linearGradient id={ids.shine} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff" stop-opacity="0" />
+        <stop offset=".5" stop-color="#fff" stop-opacity=".72" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </linearGradient>
+      <radialGradient id={ids.specGrad}>
+        <stop offset="0" stop-color="#fff" stop-opacity=".6" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </radialGradient>
+      <filter id={ids.glow} x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="1.5" result="b" />
+        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+      <filter id={ids.pglow} x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="2" result="b" />
+        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+      <filter id={ids.redglow} x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" />
+      </filter>
+
+      <path id={ids.frame} d="M350 20 L34 20 L34 232 L406 232 L406 44" />
+      <path id={ids.c} d="M296.9 160.1 A58 58 0 1 1 296.9 91.9" />
+      <g id={ids.ti}>
+        <rect x="71" y="56" width="112" height="28" />
+        <rect x="112" y="56" width="30" height="140" />
+        <rect x="332" y="56" width="32" height="140" />
+      </g>
+      <text
+        id={ids.word}
+        x="220"
+        y="274"
+        text-anchor="middle"
+        font-family="Outfit, Arial, sans-serif"
+        font-weight="600"
+        font-size="27"
+        letter-spacing="4.5"
+      >THE CAREER INSIGHTS</text>
+
+      <mask id={ids.ink} maskUnits="userSpaceOnUse" x="0" y="0" width="440" height="300">
+        <use href={`#${ids.frame}`} fill="none" stroke="#fff" stroke-width="8" />
+        <use href={`#${ids.ti}`} fill="#fff" />
+        <use href={`#${ids.c}`} fill="none" stroke="#fff" stroke-width="28" />
+        <use href={`#${ids.word}`} fill="#fff" />
+      </mask>
+    </defs>
+  </svg>
+
+  <span class="tci-logo-stage" role="img" aria-label="TCI — The Career Insights" data-tci-logo-stage>
+    <span class="tci-logo-tilt" data-tci-logo-tilt>
+      <span class="tci-logo-float">
+        <span class="tci-logo-layer tci-l-shadow">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <use href={`#${ids.frame}`} fill="none" stroke="#aab0bb" stroke-width="8" />
+            <use href={`#${ids.ti}`} fill="#aab0bb" />
+            <use href={`#${ids.c}`} fill="none" stroke="#aab0bb" stroke-width="28" />
+            <use href={`#${ids.word}`} fill="#aab0bb" />
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-aura"></span>
+
+        <span class="tci-logo-layer tci-l-shock">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <circle class="tci-shock" cx="220" cy="126" r="42" fill="none" stroke="var(--tci-red)" stroke-width="3" />
+          </svg>
+        </span>
+
+        <canvas class="tci-logo-layer tci-l-dust" data-tci-logo-dust></canvas>
+
+        <span class="tci-logo-layer tci-l-frame">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <use class="tci-frame" href={`#${ids.frame}`} pathLength="100" stroke={`url(#${ids.redGrad})`} />
+            <use class="tci-glint-tail" href={`#${ids.frame}`} pathLength="100" filter={`url(#${ids.glow})`} />
+            <use class="tci-glint" href={`#${ids.frame}`} pathLength="100" filter={`url(#${ids.glow})`} />
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-word">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <use class="tci-word" href={`#${ids.word}`} fill="var(--tci-ink)" />
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-letters">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <use class="tci-letters" href={`#${ids.ti}`} fill={`url(#${ids.inkGrad})`} />
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-c">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <use class="tci-cglow" href={`#${ids.c}`} filter={`url(#${ids.redglow})`} />
+            <use class="tci-cc" href={`#${ids.c}`} fill="none" stroke={`url(#${ids.redGrad})`} stroke-width="28" />
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-pulse">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <g mask={`url(#${ids.ink})`}>
+              <path class="tci-pulse" pathLength="100" style="animation-delay:.0s" d="M71 70 L183 70" filter={`url(#${ids.pglow})`} />
+              <path class="tci-pulse" pathLength="100" style="animation-delay:1.1s" d="M127 70 L127 196" filter={`url(#${ids.pglow})`} />
+              <path class="tci-pulse" pathLength="100" style="animation-delay:.6s" d="M348 56 L348 196" filter={`url(#${ids.pglow})`} />
+              <path class="tci-pulse" pathLength="100" style="animation-delay:1.7s" d="M296.9 160.1 A58 58 0 1 1 296.9 91.9" filter={`url(#${ids.pglow})`} />
+            </g>
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-spark">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <g transform="translate(384 22)">
+              <g class="tci-spark" filter={`url(#${ids.glow})`}>
+                <circle r="3" fill="#fff" />
+                <path d="M0 -11 L0 11 M-11 0 L11 0" stroke="#fff" stroke-width="1.4" stroke-linecap="round" />
+              </g>
+            </g>
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-spec">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <g mask={`url(#${ids.ink})`}>
+              <circle class="tci-spec" data-tci-logo-spec cx="220" cy="126" r="120" fill={`url(#${ids.specGrad})`} />
+            </g>
+          </svg>
+        </span>
+
+        <span class="tci-logo-layer tci-l-sweep">
+          <svg viewBox="0 0 440 300" aria-hidden="true" focusable="false">
+            <g mask={`url(#${ids.ink})`}>
+              <g transform="skewX(-12)">
+                <rect class="tci-sweep" x="-240" y="-30" width="150" height="360" fill={`url(#${ids.shine})`} />
+              </g>
+            </g>
+          </svg>
+        </span>
+      </span>
+    </span>
+  </span>
+</span>
