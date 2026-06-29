@@ -306,10 +306,7 @@ document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form)
     if (error) error.textContent = msg;
   };
 
-  /* WhatsApp business line — digits only for the wa.me deep link. */
-  const WHATSAPP_NUMBER = "13024992545";
-
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!status || !button) return;
 
@@ -327,39 +324,42 @@ document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form)
       return;
     }
 
-    /* Build a clean, pre-filled WhatsApp message from the form fields. */
-    const data = new FormData(form);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const interest = String(data.get("interest") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
-
-    const lines = [
-      "New enquiry from The Career Insights website",
-      "",
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Service: ${interest}`,
-      "",
-      "Requirement:",
-      message,
-    ];
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
-
+    button.disabled = true;
     status.dataset.state = "pending";
-    status.textContent = "Opening WhatsApp to send your request...";
-
-    /* Opened synchronously within the user gesture so mobile/desktop browsers
-       (including iOS Safari) don't block it as a popup. */
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) {
-      /* Popup blocked — fall back to navigating the current tab. */
-      window.location.href = url;
+    status.textContent = "Sending your request...";
+    try {
+      const data = new FormData(form);
+      /* FormSubmit AJAX endpoint — delivers to info@thecareerinsights.com and
+         returns JSON, so the user stays on this page (no thank-you redirect). */
+      const payload = {
+        name: String(data.get("name") ?? "").trim(),
+        email: String(data.get("email") ?? "").trim(),
+        interest: String(data.get("interest") ?? "").trim(),
+        message: String(data.get("message") ?? "").trim(),
+        _subject: "New enquiry from The Career Insights website",
+        _captcha: "false",
+        _template: "table",
+      };
+      const response = await fetch("https://formsubmit.co/ajax/info@thecareerinsights.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Request failed");
+      const result = await response.json().catch(() => ({}));
+      if (result && result.success === "false") throw new Error("Submission rejected");
+      form.reset();
+      fields.forEach((field) => setFieldError(field, ""));
+      form.classList.add("is-sent");
+      status.dataset.state = "success";
+      status.textContent = "✓ Request received — the TCI team will follow up within two business days.";
+    } catch {
+      form.classList.add("is-error");
+      status.dataset.state = "error";
+      status.textContent = "The request could not be sent. Please email info@thecareerinsights.com.";
+    } finally {
+      button.disabled = false;
     }
-
-    form.classList.add("is-sent");
-    status.dataset.state = "success";
-    status.textContent = "Opening WhatsApp to send your request...";
   });
 
   form.addEventListener("reset", () => {
