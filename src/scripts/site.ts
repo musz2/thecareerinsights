@@ -346,8 +346,15 @@ document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form)
         body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error("Request failed");
-      const result = await response.json().catch(() => ({}));
-      if (result && result.success === "false") throw new Error("Submission rejected");
+      const result = await response.json().catch(() => ({} as Record<string, unknown>));
+      if (result && result.success === "false") {
+        /* FormSubmit requires a one-time activation per sending domain. The
+           first submission from a new domain triggers an "Activate Form" email
+           to info@thecareerinsights.com — click that link once, then this
+           domain delivers permanently. */
+        console.warn("[contact] FormSubmit response:", result.message);
+        throw new Error("Submission rejected");
+      }
       form.reset();
       fields.forEach((field) => setFieldError(field, ""));
       form.classList.add("is-sent");
