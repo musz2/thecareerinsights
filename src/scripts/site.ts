@@ -306,7 +306,10 @@ document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form)
     if (error) error.textContent = msg;
   };
 
-  form.addEventListener("submit", async (event) => {
+  /* WhatsApp business line — digits only for the wa.me deep link. */
+  const WHATSAPP_NUMBER = "13024992545";
+
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!status || !button) return;
 
@@ -324,25 +327,39 @@ document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form)
       return;
     }
 
-    button.disabled = true;
+    /* Build a clean, pre-filled WhatsApp message from the form fields. */
+    const data = new FormData(form);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const interest = String(data.get("interest") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+
+    const lines = [
+      "New enquiry from The Career Insights website",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Service: ${interest}`,
+      "",
+      "Requirement:",
+      message,
+    ];
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+
     status.dataset.state = "pending";
-    status.textContent = "Sending your request...";
-    try {
-      const body = Object.fromEntries(new FormData(form).entries());
-      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      if (!response.ok) throw new Error("Request failed");
-      form.reset();
-      fields.forEach((field) => setFieldError(field, ""));
-      form.classList.add("is-sent");
-      status.dataset.state = "success";
-      status.textContent = "✓ Request received — the TCI team will follow up within two business days.";
-    } catch {
-      form.classList.add("is-error");
-      status.dataset.state = "error";
-      status.textContent = "The request could not be sent. Please email info@thecareerinsights.com.";
-    } finally {
-      button.disabled = false;
+    status.textContent = "Opening WhatsApp to send your request...";
+
+    /* Opened synchronously within the user gesture so mobile/desktop browsers
+       (including iOS Safari) don't block it as a popup. */
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) {
+      /* Popup blocked — fall back to navigating the current tab. */
+      window.location.href = url;
     }
+
+    form.classList.add("is-sent");
+    status.dataset.state = "success";
+    status.textContent = "Opening WhatsApp to send your request...";
   });
 
   form.addEventListener("reset", () => {
