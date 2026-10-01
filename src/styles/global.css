@@ -188,9 +188,16 @@ h2 + .lead { margin-top: 20px; }
   transition: transform .3s var(--ease);
   pointer-events: none;
 }
-.text-link:hover::after, a:hover .text-link::after,
-.footer-col a:hover::after, .footer-bottom a:hover::after,
-.contact-details dd a:hover::after, .breadcrumb a:hover::after { transform: scaleX(1); transform-origin: left; }
+/* Underline slides in on real hover only — a tap on touch screens must not
+   leave it stuck on — and always for keyboard focus. */
+@media (hover: hover) {
+  .text-link:hover::after, a:hover .text-link::after,
+  .footer-col a:hover::after, .footer-bottom a:hover::after,
+  .contact-details dd a:hover::after, .breadcrumb a:hover::after { transform: scaleX(1); transform-origin: left; }
+}
+.text-link:focus-visible::after, a:focus-visible .text-link::after,
+.footer-col a:focus-visible::after, .footer-bottom a:focus-visible::after,
+.contact-details dd a:focus-visible::after, .breadcrumb a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 .text-link svg { width: 14px; height: 14px; transition: transform .25s var(--ease); }
 .text-link:hover svg, a:hover .text-link svg { transform: translate3d(4px, 0, 0); }
 
@@ -755,10 +762,25 @@ body.menu-open .mobile-menu { visibility: visible; transition-delay: 0s; }
   font-size: .8125rem;
 }
 .footer-bottom nav { display: flex; gap: 20px; }
-/* Oversized faded wordmark anchoring the footer */
-.footer-wordmark { margin-top: 4px; margin-bottom: -0.6%; pointer-events: none; user-select: none; }
-.footer-wordmark svg { width: 100%; height: auto; overflow: visible; }
-.footer-wordmark text { font-family: var(--font-head); font-size: 132px; font-weight: 800; letter-spacing: -0.02em; }
+/* Oversized faded wordmark anchoring the footer. Real text, sized from the
+   container width (the phrase measures 11.63em in Montserrat 800), so it
+   fits edge to edge on every screen without clipping. */
+.footer-wordmark { overflow: hidden; pointer-events: none; user-select: none; }
+.footer-wordmark span {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: calc(min(100vw - var(--gutter) * 2, var(--shell)) / 11.8);
+  line-height: .78;
+  letter-spacing: -0.02em;
+  text-align: center;
+  white-space: nowrap;
+  color: transparent;
+  background: linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,0) 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding-top: .06em;
+}
 
 /* ---------------------------------------------------------- Page loader */
 /* Logo intro / page-transition overlay. All motion is opacity + transform on

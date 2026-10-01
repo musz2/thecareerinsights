@@ -66,15 +66,5 @@ const socials = [
     <nav aria-label="Legal">{legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}</nav>
   </div>
 
-  <div class="shell footer-wordmark" aria-hidden="true">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax meet">
-      <defs>
-        <linearGradient id="footer-wordmark-fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffffff" stop-opacity=".12" />
-          <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
-        </linearGradient>
-      </defs>
-      <text x="600" y="108" text-anchor="middle" textLength="1196" lengthAdjust="spacingAndGlyphs" fill="url(#footer-wordmark-fade)">THE CAREER INSIGHTS</text>
-    </svg>
-  </div>
+  <div class="shell footer-wordmark" aria-hidden="true"><span>THE CAREER INSIGHTS</span></div>
 </footer>

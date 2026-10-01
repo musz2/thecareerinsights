@@ -106,11 +106,11 @@ mm.add("(prefers-reduced-motion: no-preference)", () => {
     });
   });
 
-  /* Footer wordmark slides into place as the footer arrives */
-  const wordmark = document.querySelector(".footer-wordmark svg");
+  /* Footer wordmark rises gently into place as the footer arrives */
+  const wordmark = document.querySelector(".footer-wordmark span");
   if (wordmark) {
-    gsap.fromTo(wordmark, { xPercent: -6, autoAlpha: 0.2 }, {
-      xPercent: 0,
+    gsap.fromTo(wordmark, { yPercent: 18, autoAlpha: 0.3 }, {
+      yPercent: 0,
       autoAlpha: 1,
       ease: "none",
       scrollTrigger: { trigger: ".site-footer", start: "top bottom", end: "bottom bottom", scrub: true }
