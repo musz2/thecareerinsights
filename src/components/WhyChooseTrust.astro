@@ -1,24 +1,22 @@
 ---
-/* "Why Choose The Career Insights?" trust section.
-   Dark cinematic background, gold accents, glass depth.
-   Left: heading + benefits. Right: floating custom trust badge. */
+/* "Why Choose The Career Insights?" — six trust benefits beside the
+   E-Verified U.S. employer badge. */
 import TrustBadge from "./TrustBadge.astro";
 import { trustBenefits } from "../data/site";
 ---
 
-<section class="trust-section" data-chapter="Contact" data-cinematic-scene="trust">
-  <div class="trust-grid shell">
-    <div class="trust-copy">
-      <p class="eyebrow gold">Trusted partnership</p>
-      <h2 data-mask-reveal>Why Choose The Career Insights?</h2>
-      <p class="trust-lede">
-        We combine expertise, innovation, and dedication to deliver exceptional results
-        for professionals, businesses, universities, and workforce partners.
-      </p>
+<section class="section section-gray trust-section" aria-labelledby="trust-title">
+  <div class="shell trust-grid">
+    <div>
+      <div class="trust-head" data-reveal>
+        <p class="eyebrow">Trusted partnership</p>
+        <h2 id="trust-title">Why choose The Career Insights?</h2>
+        <p class="lead">We combine expertise, innovation, and dedication to deliver results for professionals, businesses, universities, and workforce partners.</p>
+      </div>
       <ul class="trust-benefits">
         {trustBenefits.map((benefit) => (
           <li data-reveal>
-            <span class="trust-icon" aria-hidden="true">{benefit.code}</span>
+            <span class="trust-code" aria-hidden="true">{benefit.code}</span>
             <div>
               <h3>{benefit.title}</h3>
               <p>{benefit.copy}</p>
@@ -27,7 +25,7 @@ import { trustBenefits } from "../data/site";
         ))}
       </ul>
     </div>
-    <div class="trust-badge-col">
+    <div class="trust-badge-col" data-reveal="scale">
       <TrustBadge />
     </div>
   </div>

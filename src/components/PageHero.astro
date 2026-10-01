@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  copy?: string;
+  image: ImageMetadata;
+  crumbs?: { label: string; href: string }[];
+  position?: string;
+}
+
+const { eyebrow, title, copy, image, crumbs = [], position = "center" } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="page-hero-media" aria-hidden="true">
+    <Image src={image} alt="" widths={[768, 1280, 1920, 2560, 3840]} sizes="100vw" format="webp" quality={72} loading="eager" fetchpriority="high" style={`object-position:${position}`} />
+  </div>
+  <div class="shell">
+    {crumbs.length > 0 && (
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        {crumbs.map((crumb) => (<><span aria-hidden="true">/</span><a href={crumb.href}>{crumb.label}</a></>))}
+      </nav>
+    )}
+    <p class="eyebrow light">{eyebrow}</p>
+    <h1>{title}</h1>
+    {copy && <p>{copy}</p>}
+    <slot />
+  </div>
+</section>

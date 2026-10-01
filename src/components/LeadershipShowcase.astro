@@ -11,7 +11,18 @@ interface Props {
 
 const { compact = false } = Astro.props;
 
+
 const leaders = [
+  {
+    image: workforceBlue,
+    alt: "Shahbaz Ahmed Khan, Chief Executive Officer, in a blue executive suit",
+    name: "Shahbaz Ahmed Khan",
+    title: "Chief Executive Officer",
+    role: "Executive Management",
+    focus: "Executive Management",
+    copy: "Leads executive management at TCI — setting company direction and driving business development, operational execution, delivery performance, and scalable staffing partnerships.",
+    tags: ["Executive Management", "Business Development", "Operations"]
+  },
   {
     image: directorTie,
     alt: "Amaer Ahmed Khan, Director of Talent Solutions in professional business attire",
@@ -21,16 +32,6 @@ const leaders = [
     focus: "Talent Solutions",
     copy: "Leads talent strategy, hiring solutions, client partnerships, and future-ready workforce programs aligned to long-term business growth.",
     tags: ["Talent Strategy", "Client Success", "Hiring Direction"]
-  },
-  {
-    image: workforceBlue,
-    alt: "Shahbaz Ahmed Khan, Director of Operations and Workforce Solutions in a blue executive suit",
-    name: "Shahbaz Ahmed Khan",
-    title: "Director | Operations & Workforce Solutions",
-    role: "Business Development & Operations",
-    focus: "Head of Workforce Solutions",
-    copy: "Drives workforce planning, business development, operational execution, delivery performance, and scalable staffing partnerships.",
-    tags: ["Workforce Solutions", "Business Development", "Operations"]
   },
   {
     image: seniorManagerBlack,
@@ -55,50 +56,28 @@ const leaders = [
 ];
 ---
 
-<section class:list={["leadership-section", compact ? "leadership-preview-section" : "leadership-team-section"]} data-cinematic-scene="leadership" data-chapter={compact ? "Leadership" : "Team"}>
-  <div class="shell leadership-section-shell">
-    <div class="leadership-section-heading" data-reveal>
-      <div>
-        <p class="eyebrow">Leadership Team</p>
-        <h2>{compact ? "The People Behind Our Workforce Vision" : "Leadership that connects strategy, talent, and execution."}</h2>
-      </div>
-      <p>{compact ? "A leadership team focused on talent strategy, workforce solutions, client success, and business growth." : "Guiding talent solutions, workforce strategy, and business growth with experience, trust, and execution."}</p>
+<section class="section">
+  <div class="shell">
+    <div class="section-heading" data-reveal>
+      <div><p class="eyebrow">Leadership team</p><h2>{compact ? "The people behind our workforce vision." : "Leadership that connects strategy, talent, and execution."}</h2></div>
+      <p>A leadership team focused on talent strategy, workforce solutions, client success, and business growth.</p>
     </div>
-
-    <div class="leadership-grid" aria-label="The Career Insights leadership team">
-      {leaders.map((leader, index) => (
-        <article class="leadership-card" data-reveal style={`--leader-i:${index}`}>
-          <a class="leadership-image-wrap" href="/leadership" aria-label={`View leadership profile for ${leader.name}`}>
-            <Image
-              src={leader.image}
-              alt={leader.alt}
-              widths={[320, 420, 620, 760]}
-              sizes="(max-width: 760px) 88vw, (max-width: 1180px) 44vw, 540px"
-              format="webp"
-              quality={88}
-              loading="lazy"
-            />
-            <span class="leadership-image-glow" aria-hidden="true"></span>
-          </a>
-          <div class="leadership-card-body">
-            <span class="leadership-index" aria-hidden="true">•</span>
+    <div class="leader-grid">
+      {leaders.map((leader) => (
+        <article class="leader-card" data-reveal>
+          <div class="leader-photo">
+            <Image src={leader.image} alt={leader.alt} widths={[320, 480, 640]} sizes="(max-width: 767px) 92vw, (max-width: 1199px) 46vw, 290px" format="webp" quality={84} loading="lazy" />
+          </div>
+          <div class="leader-body">
             <h3>{leader.name}</h3>
-            <p class="leadership-title">{leader.title}</p>
-            <p class="leadership-role">{leader.role}</p>
-            <p class="leadership-focus">{leader.focus}</p>
-            <p class="leadership-copy">{leader.copy}</p>
-            <ul class="leadership-tags" aria-label="Leadership focus areas">
-              {leader.tags.map((tag) => <li>{tag}</li>)}
-            </ul>
+            <p class="leader-title">{leader.title}</p>
+            <p class="leader-role">{leader.role}</p>
+            <p>{leader.copy}</p>
+            <ul class="leader-tags">{leader.tags.map((tag) => <li>{tag}</li>)}</ul>
           </div>
         </article>
       ))}
     </div>
-
-    {compact && (
-      <div class="leadership-preview-action" data-reveal>
-        <a class="button button-red" href="/leadership">Meet Our Leadership <span aria-hidden="true">↗</span></a>
-      </div>
-    )}
+    {compact && <div class="button-row"><a class="button button-outline" href="/leadership">Meet our leadership</a></div>}
   </div>
 </section>

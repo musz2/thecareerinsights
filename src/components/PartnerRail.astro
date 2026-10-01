@@ -1,0 +1,46 @@
+---
+/* Two parallel looping rails of client and partner logos, in their original
+   brand colours. GSAP drives the top rail left → right and the bottom rail
+   right → left; scrolling speeds them up, hovering eases them to a stop.
+   Each list is rendered twice for a seamless loop; copies are hidden from
+   assistive tech. */
+import { partners } from "../data/site";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Trusted by the clients and partners we work with." } = Astro.props;
+const half = Math.ceil(partners.length / 2);
+const rows = [
+  { items: partners.slice(0, half), direction: "ltr" },
+  { items: partners.slice(half), direction: "rtl" }
+].filter((row) => row.items.length > 0);
+---
+
+{partners.length > 0 && (
+  <section class="partner-rail" id="partners" aria-labelledby="partners-title">
+    <div class="shell partner-head">
+      <p class="eyebrow">Clients &amp; partners</p>
+      <h2 id="partners-title">{title}</h2>
+    </div>
+    <div class="partner-rows" data-partner-rail>
+      {rows.map((row) => (
+        <div class="partner-window">
+          <ul class="partner-track" data-partner-track data-direction={row.direction}>
+            {row.items.map((partner) => (
+              <li class="partner-item">
+                <img src={partner.logo} alt={partner.name} width={partner.width} height={partner.height} decoding="async" />
+              </li>
+            ))}
+            {row.items.map((partner) => (
+              <li class="partner-item" aria-hidden="true">
+                <img src={partner.logo} alt="" width={partner.width} height={partner.height} decoding="async" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+)}

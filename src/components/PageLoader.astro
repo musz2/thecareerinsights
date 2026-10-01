@@ -1,0 +1,15 @@
+---
+/* Full-screen logo overlay: the intro on the homepage and the transition
+   between pages. Shown only when <html> carries `loader-on` (set by the head
+   script) or `loader-in` (set on link click); otherwise display: none.
+   Layers, back to front: a backdrop blur, a white veil, the logo. On reveal
+   the logo leaves first, the veil fades to show the page through the blur,
+   then the blur fades so the page sharpens into focus. */
+import LogoMark from "./LogoMark.astro";
+---
+
+<div class="page-loader" data-page-loader aria-hidden="true">
+  <div class="page-loader-blur"></div>
+  <div class="page-loader-veil"></div>
+  <div class="page-loader-logo"><LogoMark /></div>
+</div>

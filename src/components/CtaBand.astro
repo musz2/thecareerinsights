@@ -1,0 +1,23 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  title?: string;
+  copy?: string;
+}
+
+const {
+  title = "Ready to build a stronger workforce?",
+  copy = "Tell us about the role, the timeline, and the operating context. We will connect you with the right specialist."
+} = Astro.props;
+---
+
+<section class="cta-band">
+  <div class="shell">
+    <div>
+      <h2>{title}</h2>
+      <p>{copy}</p>
+    </div>
+    <a class="button button-light" href="/contact">Start a conversation <Icon name="arrow" /></a>
+  </div>
+</section>

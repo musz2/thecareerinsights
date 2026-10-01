@@ -1,0 +1,80 @@
+---
+import { contactInfo, legalLinks, solutionLinks } from "../data/site";
+import LogoMark from "./LogoMark.astro";
+import TrustBadge from "./TrustBadge.astro";
+import Icon from "./Icon.astro";
+
+const companyLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Leadership", href: "/leadership" },
+  { label: "Industries", href: "/industries" },
+  { label: "Expertise", href: "/services" },
+  { label: "Contact", href: "/contact" }
+];
+
+const socials = [
+  { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/company/the-career-insights/" },
+  { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/thecareerinsightshub/" },
+  { label: "WhatsApp", icon: "whatsapp", href: "https://wa.me/15105458417" }
+] as const;
+---
+
+<footer class="site-footer">
+  <div class="shell footer-top">
+    <a class="footer-brand" href="/" aria-label="The Career Insights home"><LogoMark /></a>
+    <p class="footer-tagline">Talent solutions and technology services — connecting organizations with verified talent from Delaware, USA and Hyderabad, India.</p>
+    <div class="footer-aside">
+      <ul class="footer-social" aria-label="Social media">
+        {socials.map((social) => (
+          <li><a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} title={social.label}><Icon name={social.icon} /></a></li>
+        ))}
+      </ul>
+      <TrustBadge size="compact" />
+    </div>
+  </div>
+
+  <div class="shell footer-main">
+    <div class="footer-col">
+      <h3>USA</h3>
+      <a href={`tel:${contactInfo.deskTel}`}>{contactInfo.desk}</a>
+      <a href={`tel:${contactInfo.mobileTel}`}>{contactInfo.mobile}</a>
+      <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+      <address>{contactInfo.usAddress.join(", ")}</address>
+    </div>
+
+    <div class="footer-col">
+      <h3>India</h3>
+      <address>{contactInfo.indiaAddress.join(", ")}</address>
+      <span>{contactInfo.hours}</span>
+    </div>
+
+    <nav class="footer-col" aria-label="Company">
+      <h3>Company</h3>
+      {companyLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <nav class="footer-col" aria-label="Solutions">
+      <h3>Solutions</h3>
+      <a href="/solutions">All solutions</a>
+      {solutionLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+
+  <div class="shell footer-bottom">
+    <span>© {new Date().getFullYear()} The Career Insights LLC · E-Verified U.S. Employer · Equal opportunity employer</span>
+    <nav aria-label="Legal">{legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}</nav>
+  </div>
+
+  <div class="shell footer-wordmark" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax meet">
+      <defs>
+        <linearGradient id="footer-wordmark-fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff" stop-opacity=".12" />
+          <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <text x="600" y="108" text-anchor="middle" textLength="1196" lengthAdjust="spacingAndGlyphs" fill="url(#footer-wordmark-fade)">THE CAREER INSIGHTS</text>
+    </svg>
+  </div>
+</footer>

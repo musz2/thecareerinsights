@@ -1,0 +1,13 @@
+---
+import { Image } from "astro:assets";
+import { regions } from "../data/visuals";
+---
+
+<div class="region-divider">
+  {regions.map((region) => (
+    <figure data-reveal>
+      <Image src={region.image} alt={`World map highlighting ${region.label}`} widths={[400, 640]} sizes="(max-width: 767px) 60vw, 380px" format="webp" quality={85} loading="lazy" />
+      <figcaption>{region.label}</figcaption>
+    </figure>
+  ))}
+</div>

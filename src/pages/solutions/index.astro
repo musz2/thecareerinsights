@@ -1,9 +1,64 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import InsightRow from "../../components/InsightRow.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Icon from "../../components/Icon.astro";
 import { solutionLinks } from "../../data/site";
+import heroImage from "../../assets/images/site/photo-planning-wall.webp";
+import photo from "../../assets/images/site/photo-recruitment-review.webp";
+
+const descriptions = [
+  "A strategic partnership that manages the full recruitment lifecycle with precision, transparency, and speed.",
+  "Flexible contractor programs with centralized vendor management, disciplined cost control, and end-to-end compliance.",
+  "Integrated workforce planning across permanent, temporary, contract, and internal talent."
+];
 ---
+
 <BaseLayout title="Talent Solutions | The Career Insights" description="RPO, contingent workforce, and total talent solutions designed around your business.">
-  <section class="page-hero"><div class="shell"><p class="eyebrow light">Solutions</p><h1>Capabilities that move your workforce forward.</h1><p>Future-focused talent programs that strengthen decision-making, improve delivery, and create sustainable growth.</p></div></section>
-  <section class="section dotted-section"><div class="shell centered-heading"><p class="eyebrow">A flexible model</p><h2>Solutions built around your goals.</h2><p>No two organizations are alike. Whether you are growing quickly, redesigning recruitment, or integrating new technology into the talent ecosystem, we shape the right solution and scale it alongside the business.</p></div><div class="shell solution-index-grid">{solutionLinks.map((item, index) => <a href={item.href} data-reveal><span aria-hidden="true">•</span><h3>{item.label}</h3><p>{index === 0 ? "A strategic partnership that manages the full recruitment lifecycle with precision, transparency, and speed." : index === 1 ? "Flexible contractor programs with centralized vendor management, disciplined cost control, and end-to-end compliance." : "Integrated workforce planning across permanent, temporary, contract, and internal talent."}</p><b>Learn more ↗</b></a>)}</div></section>
-  <section class="section feature-section"><div class="shell split-intro"><div><p class="eyebrow light">Our approach</p><h2>One partner. Every talent category.</h2></div><div class="rich-copy light-copy"><p class="lead">We connect talent attraction, assessment, onboarding, compliance, intelligence, and internal mobility in one adaptable framework.</p><p>That gives leaders a clearer view of demand, cost, quality, and opportunity while giving candidates a more consistent experience.</p><a class="button button-red" href="/contact">Design your program</a></div></div></section>
+  <PageHero eyebrow="Solutions" title="Capabilities that move your workforce forward." copy="Future-focused talent programs that strengthen decision-making, improve delivery, and create sustainable growth." image={heroImage} />
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading" data-reveal>
+        <div><p class="eyebrow">A flexible model</p><h2>Solutions built around your goals.</h2></div>
+        <p>Whether you are growing quickly, redesigning recruitment, or integrating new technology into the talent ecosystem, we shape the right model and scale it alongside the business.</p>
+      </div>
+      <div class="solution-grid cols-3">
+        {solutionLinks.map((item, index) => (
+          <a class="solution-card" href={item.href} data-reveal>
+            <span class="num">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{item.label}</h3>
+            <p>{descriptions[index]}</p>
+            <span class="text-link">Learn more <Icon name="arrow" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="shell split">
+      <div class="split-copy" data-reveal>
+        <p class="eyebrow">Our approach</p>
+        <h2>One partner. Every talent category.</h2>
+        <p class="lead">We connect talent attraction, assessment, onboarding, compliance, intelligence, and internal mobility in one adaptable framework.</p>
+        <p>That gives leaders a clearer view of demand, cost, quality, and opportunity — and gives candidates a more consistent experience.</p>
+        <div class="button-row"><a class="button button-red" href="/contact">Design your program <Icon name="arrow" /></a></div>
+      </div>
+      <div class="split-media" data-reveal>
+        <div class="media-frame" data-parallax><Image src={photo} alt="Two colleagues reviewing a recruitment plan" widths={[480, 720, 1000]} sizes="(max-width: 960px) 92vw, 560px" format="webp" quality={80} loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading" data-reveal><div><p class="eyebrow">Impact</p><h2>What every program is built to deliver.</h2></div></div>
+      <InsightRow />
+    </div>
+  </section>
+
+  <CtaBand />
 </BaseLayout>

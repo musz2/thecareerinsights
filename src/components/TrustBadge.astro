@@ -5,7 +5,7 @@ interface Props {
 const { size = "regular" } = Astro.props;
 ---
 
-<div class={`tbadge tbadge-${size}`} data-trust-badge={size === "regular" ? "true" : undefined} aria-label="E-Verified U.S. Employer badge">
+<div class={`tbadge tbadge-${size}`} aria-label="E-Verified U.S. Employer badge">
   <svg class="tbadge-everify-logo" viewBox="0 0 520 160" role="img" aria-label="E-Verified">
     <g class="everify-symbol" transform="translate(18 27)">
       <rect x="0" y="0" width="70" height="106" rx="9" fill="#163d75" />
@@ -22,4 +22,5 @@ const { size = "regular" } = Astro.props;
     </g>
     <text x="224" y="96" fill="#1a4b89" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="800" letter-spacing="-3">-Verified</text>
   </svg>
+  <p class="tbadge-sub">U.S. Employer</p>
 </div>

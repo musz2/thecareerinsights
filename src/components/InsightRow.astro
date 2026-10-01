@@ -1,0 +1,14 @@
+---
+import { Image } from "astro:assets";
+import { insights } from "../data/visuals";
+---
+
+<div class="insight-grid">
+  {insights.map((item) => (
+    <article class="insight" data-reveal>
+      <Image src={item.image} alt="" width={128} height={128} format="webp" quality={90} loading="lazy" />
+      <h3>{item.title}</h3>
+      <p>{item.copy}</p>
+    </article>
+  ))}
+</div>

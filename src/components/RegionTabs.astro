@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import { regions } from "../data/visuals";
+---
+
+<div data-tabs>
+  <div class="region-tabs" role="tablist" aria-label="Regions">
+    {regions.map((region, index) => (
+      <button
+        class="region-tab"
+        type="button"
+        role="tab"
+        id={`tab-${region.id}`}
+        aria-controls={`panel-${region.id}`}
+        aria-selected={index === 0 ? "true" : "false"}
+        tabindex={index === 0 ? 0 : -1}
+      >{region.label}</button>
+    ))}
+  </div>
+  {regions.map((region, index) => (
+    <div class="region-panel" role="tabpanel" id={`panel-${region.id}`} aria-labelledby={`tab-${region.id}`} hidden={index !== 0}>
+      <Image src={region.image} alt={`World map highlighting ${region.label}`} widths={[640, 960, 1280]} sizes="(max-width: 960px) 92vw, 680px" format="webp" quality={85} loading="lazy" />
+      <div>
+        <h3>{region.title}</h3>
+        <p>{region.copy}</p>
+        <dl>
+          {region.details.map((detail) => (
+            <div><dt>{detail.term}</dt><dd>{detail.value}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  ))}
+</div>

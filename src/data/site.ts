@@ -2,18 +2,21 @@ export const solutionLinks = [
   {
     label: "Recruitment Process Outsourcing",
     short: "RPO",
+    tagline: "End-to-end recruitment partnership",
     href: "/solutions/rpo",
     copy: "Strategic recruitment partnerships covering attraction, assessment, onboarding, compliance, and high-quality hiring with speed."
   },
   {
     label: "Contingent Workforce",
     short: "Contingent Workforce",
+    tagline: "Flexible contractor programs",
     href: "/solutions/contingent-workforce",
     copy: "Centralized vendor management, cost control, end-to-end compliance, and rapid access to deployment-ready contractors."
   },
   {
     label: "Total Talent Solutions",
     short: "Talent Solutions",
+    tagline: "Every talent type, one framework",
     href: "/solutions/talent-solutions",
     copy: "One integrated framework for permanent, contract, temporary, and internal talent with better sourcing, mobility, and temp-to-perm flow."
   }
@@ -22,7 +25,9 @@ export const solutionLinks = [
 export const contactInfo = {
   email: "info@thecareerinsights.com",
   desk: "+1 (302) 231-2961",
+  deskTel: "+13022312961",
   mobile: "+1 (302) 499-2545",
+  mobileTel: "+13024992545",
   hours: "Mon-Fri 9AM-6PM EST",
   usAddress: ["8 The Green", "Dover, DE 19901 USA"],
   indiaAddress: ["Hyderabad", "Telangana, India"]
@@ -198,4 +203,30 @@ export const serviceGroups = [
       { title: "Assurance", items: ["Application maintenance and support", "Security and compliance", "Web application development", "Integration support"] }
     ]
   }
+];
+
+/* Clients and partners shown in the looping partners rail (homepage + About).
+   Logos live in /public/partners. Width/height are tuned per logo so wide
+   wordmarks and square marks carry similar visual weight. */
+export interface Partner { name: string; logo: string; width: number; height: number }
+
+export const partners: Partner[] = [
+  { name: "Lockheed Martin", logo: "/partners/lockheed-martin.svg", width: 179, height: 27 },
+  { name: "Slack", logo: "/partners/slack.svg", width: 138, height: 35 },
+  { name: "DEBUG Tech Studio", logo: "/partners/debug-tech-studio.svg", width: 127, height: 37 },
+  { name: "Aurora", logo: "/partners/aurora.svg", width: 136, height: 35 },
+  { name: "Slacker", logo: "/partners/slacker.svg", width: 142, height: 34 },
+  { name: "Microsoft", logo: "/partners/microsoft.svg", width: 149, height: 32 },
+  { name: "IBM", logo: "/partners/ibm.svg", width: 108, height: 43 },
+  { name: "Oracle", logo: "/partners/oracle.svg", width: 191, height: 25 },
+  { name: "Salesforce", logo: "/partners/salesforce.svg", width: 65, height: 46 },
+  { name: "Deloitte", logo: "/partners/deloitte.svg", width: 157, height: 30 },
+  { name: "Accenture", logo: "/partners/accenture.svg", width: 131, height: 36 },
+  { name: "Infosys", logo: "/partners/infosys.svg", width: 108, height: 43 },
+  { name: "TCS", logo: "/partners/tcs.svg", width: 114, height: 41 },
+  { name: "Wipro", logo: "/partners/wipro.svg", width: 58, height: 46 },
+  { name: "Cognizant", logo: "/partners/cognizant.svg", width: 162, height: 29 },
+  { name: "Amazon Web Services", logo: "/partners/aws.svg", width: 77, height: 46 },
+  { name: "Google Cloud", logo: "/partners/google-cloud.svg", width: 158, height: 29 },
+  { name: "Capgemini", logo: "/partners/capgemini.svg", width: 141, height: 33 }
 ];

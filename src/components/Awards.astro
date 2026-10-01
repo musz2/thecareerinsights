@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import { awards } from "../data/visuals";
+---
+
+{awards.enabled && (
+  <section class="section" aria-labelledby="awards-title">
+    <div class="shell awards">
+      <div data-reveal>
+        <p class="eyebrow">Recognition</p>
+        <h2 id="awards-title">Rated by clients. Recognized by the industry.</h2>
+        <p class="lead">Independent customer-satisfaction ratings from HRO Today's Baker's Dozen.</p>
+      </div>
+      <div class="awards-list">
+        {awards.items.map((award) => (
+          <figure class="award" data-reveal="scale">
+            <Image src={award.image} alt={award.alt} widths={[200, 400]} sizes="200px" format="webp" quality={85} loading="lazy" />
+            <figcaption>{award.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

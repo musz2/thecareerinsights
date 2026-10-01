@@ -6,7 +6,7 @@
  * action (voice toggle on, or per-message "Speak"). Speech is cancelled on
  * close, mute, and page navigation.
  */
-import gsap from "gsap";
+import { hidePanel, showPanel, staggerIn } from "./motion";
 import { assistantConfig, intents, quickQuestions } from "../data/assistantKnowledge";
 
 type Status = "idle" | "listening" | "thinking" | "speaking" | "muted";
@@ -224,13 +224,8 @@ export function initAssistant() {
     document.body.classList.toggle("assistant-open", next);
     if (next) {
       panel.style.visibility = "visible";
-      if (reducedMotion) {
-        panel.style.opacity = "1";
-        panel.style.transform = "none";
-      } else {
-        gsap.fromTo(panel, { opacity: 0, y: 26, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "power3.out" });
-        gsap.fromTo(panel.querySelectorAll(".assistant-chip, .assistant-head, .assistant-msg"), { y: 14, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.03, duration: 0.35, ease: "power2.out", delay: 0.08 });
-      }
+      showPanel(panel, { y: 20, scale: 0.96 });
+      staggerIn(panel.querySelectorAll(".assistant-chip, .assistant-head, .assistant-msg"));
       if (!greeted) {
         greeted = true;
         addMessage("bot", assistantConfig.greeting, true);
@@ -240,13 +235,7 @@ export function initAssistant() {
       stopSpeech();
       try { recognition?.stop(); } catch { /* noop */ }
       setStatus(muted ? "muted" : "idle");
-      const finish = () => { panel.style.visibility = "hidden"; };
-      if (reducedMotion) {
-        panel.style.opacity = "0";
-        finish();
-      } else {
-        gsap.to(panel, { opacity: 0, y: 20, scale: 0.985, duration: 0.28, ease: "power2.in", onComplete: finish });
-      }
+      hidePanel(panel, { y: 14, scale: 0.98 }).then(() => { if (!open) panel.style.visibility = "hidden"; });
       orb.focus();
     }
   };

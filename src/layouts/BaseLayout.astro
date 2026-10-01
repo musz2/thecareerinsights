@@ -1,28 +1,28 @@
 ---
-import "@fontsource-variable/archivo";
-import "@fontsource-variable/manrope";
+import "@fontsource-variable/montserrat";
+import "@fontsource-variable/open-sans";
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
-import CinematicFooter from "../components/CinematicFooter.astro";
-import AmbientBackground from "../components/AmbientBackground.astro";
-import ChapterProgress from "../components/ChapterProgress.astro";
-import PremiumCursor from "../components/PremiumCursor.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import AIAssistant from "../components/AIAssistant.astro";
-import LogoMark from "../components/LogoMark.astro";
+import Icon from "../components/Icon.astro";
+import PageLoader from "../components/PageLoader.astro";
 import { contactInfo } from "../data/site";
 
 interface Props {
   title?: string;
   description?: string;
+  /* "light" keeps the header solid from the top (pages without a dark hero) */
+  header?: "overlay" | "light";
 }
 
 const {
-  title = "The Career Insights | Career Intelligence for Future-Ready Professionals",
-  description = "Career intelligence, technology training, workforce solutions, and digital transformation for professionals and organizations."
+  title = "The Career Insights | Talent Solutions and Technology Services",
+  description = "Recruitment, contingent workforce, total talent, and technology services for organizations across the United States and globally.",
+  header = "overlay"
 } = Astro.props;
 
 const siteOrigin = (Astro.site ?? new URL("https://thecareerinsights.com")).origin;
-/* Per-page canonical + og:url (previously hardcoded to the homepage) */
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://thecareerinsights.com").href;
 
 const structuredData = {
@@ -62,7 +62,7 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#08090b" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
@@ -78,28 +78,38 @@ const structuredData = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
-    <link rel="mask-icon" href="/favicon.svg" color="#d1212e" />
     <meta name="application-name" content="The Career Insights" />
     <meta name="apple-mobile-web-app-title" content="TCI" />
     <title>{title}</title>
+    <script is:inline>
+      /* Content starts hidden for scroll reveals only while JS can reveal it:
+         if the motion bundle hasn't booted within 4s, show everything. */
+      (function (root) {
+        root.classList.add("js");
+        setTimeout(function () { if (!root.classList.contains("motion-ready")) root.classList.remove("js"); }, 4000);
+
+        /* Logo overlay: full intro on the homepage, a quicker run after an
+           internal page switch. Skipped for reduced motion. Never left up
+           longer than 6s even if scripts fail. */
+        var fromNav = false;
+        try { fromNav = sessionStorage.getItem("tci-nav") === "1"; sessionStorage.removeItem("tci-nav"); } catch (e) {}
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduce && (fromNav || location.pathname === "/")) {
+          root.classList.add("loader-on", fromNav ? "loader-quick" : "loader-full");
+          setTimeout(function () { root.classList.remove("loader-on", "loader-quick", "loader-full"); }, 6000);
+        }
+      })(document.documentElement);
+    </script>
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
-  <body id="top">
+  <body id="top" data-header={header}>
+    <PageLoader />
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="cinematic-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
-    <AmbientBackground />
-    <div class="site-loader" data-site-loader aria-hidden="true">
-      <LogoMark class="loader-logo" />
-      <p>Connecting talent to opportunity</p>
-      <div><i></i></div>
-    </div>
     <SiteHeader />
-    <ChapterProgress />
     <main id="main-content"><slot /></main>
-    <CinematicFooter />
-    <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+    <SiteFooter />
+    <a class="back-to-top" href="#top" aria-label="Back to top"><Icon name="up" /></a>
     <AIAssistant />
-    <PremiumCursor />
     <script>
       import "../scripts/site.ts";
     </script>

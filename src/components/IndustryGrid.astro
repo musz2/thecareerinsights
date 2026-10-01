@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import { featuredIndustries } from "../data/visuals";
+import Icon from "./Icon.astro";
+
+interface Props {
+  linkLabel?: string;
+  href?: string;
+}
+
+const { linkLabel = "Discuss your needs", href = "/contact" } = Astro.props;
+---
+
+<div class="industry-grid" role="list">
+  {featuredIndustries.map((industry) => (
+    <a class:list={["industry-card", { wide: industry.wide }]} href={href} data-reveal="scale" role="listitem">
+      <div class="industry-media">
+        <Image src={industry.image} alt="" widths={[480, 768]} sizes="(max-width: 640px) 92vw, (max-width: 960px) 46vw, 600px" format="webp" quality={80} loading="lazy" />
+      </div>
+      <div class="industry-body">
+        <h3>{industry.title}</h3>
+        <p>{industry.copy}</p>
+        <span class="text-link">{linkLabel} <Icon name="arrow" /></span>
+      </div>
+    </a>
+  ))}
+</div>
+<p class="rail-hint" aria-hidden="true">Swipe to see all sectors <Icon name="arrow" /></p>

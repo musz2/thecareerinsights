@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import IndustryGrid from "../components/IndustryGrid.astro";
+import RegionDivider from "../components/RegionDivider.astro";
+import CtaBand from "../components/CtaBand.astro";
 import { industries } from "../data/site";
+import heroImage from "../assets/images/site/photo-workforce.webp";
+
 const descriptions = [
   "Digital talent for infrastructure, platforms, software, data, security, and transformation.",
   "Cleared specialists and program talent for complex, mission-critical environments.",
@@ -16,14 +22,40 @@ const descriptions = [
   "Network, cloud, security, infrastructure, customer, and transformation expertise."
 ];
 ---
+
 <BaseLayout title="Industries | The Career Insights" description="Talent strategies for technology, public sector, healthcare, energy, education, finance, manufacturing, and more.">
-  <section class="page-hero industries-hero"><div class="shell"><p class="eyebrow light">Industries</p><h1>Your industry’s challenges.<br />Our future-proof talent strategy.</h1><p>We bring sector context and flexible workforce programs to the operating realities behind every role.</p></div></section>
-  <section class="section dotted-section"><div class="shell centered-heading"><p class="eyebrow">Sector expertise</p><h2>Built for your industry and your future.</h2><p>Every industry faces different regulatory pressures, skills gaps, growth cycles, and transformation demands. TCI adapts the talent strategy to your world.</p></div><div class="shell industries-grid">{industries.map((industry, index) => <article data-reveal><span aria-hidden="true">•</span><h3>{industry}</h3><p>{descriptions[index]}</p><a href="/contact">Discuss your needs ↗</a></article>)}</div></section>
-  <section class="stat-band">
-    <strong class="sr-only">500,000+ pre-vetted profiles</strong>
-    <div class="stat-marquee" aria-hidden="true">
-      <div class="stat-marquee-track">{Array.from({ length: 12 }).map(() => <span>500,000+<i>✦</i></span>)}</div>
+  <PageHero eyebrow="Industries" title="Your industry's challenges. Our talent strategy." copy="We bring sector context and flexible workforce programs to the operating realities behind every role." image={heroImage} />
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading" data-reveal>
+        <div><p class="eyebrow">Featured sectors</p><h2>Built for your industry and your future.</h2></div>
+        <p>Every industry faces different regulatory pressures, skills gaps, growth cycles, and transformation demands. We adapt the talent strategy to your world.</p>
+      </div>
+      <IndustryGrid />
     </div>
-    <div class="shell stat-band-foot"><p>Pre-vetted IT and professional profiles available through our extended talent database.</p><a class="button button-dark" href="/contact">Access the network</a></div>
   </section>
+
+  <section aria-labelledby="regions-title">
+    <div class="shell">
+      <h2 class="sr-only" id="regions-title">Regions we recruit across</h2>
+      <RegionDivider />
+    </div>
+  </section>
+
+  <section class="section section-gray">
+    <div class="shell">
+      <div class="section-heading" data-reveal>
+        <div><p class="eyebrow">All sectors</p><h2>Where we place talent.</h2></div>
+        <p>Beyond our featured sectors, TCI supports hiring across twelve industries.</p>
+      </div>
+      <div class="sector-list">
+        {industries.map((industry, index) => (
+          <article data-reveal><h3>{industry}</h3><p>{descriptions[index]}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Hiring in a specialist sector?" copy="Tell us about the roles and the regulatory context. We'll come back with a sourcing plan." />
 </BaseLayout>
