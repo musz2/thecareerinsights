@@ -28,7 +28,7 @@ export const featuredIndustries = [
 ];
 
 export const insights = [
-  { title: "Speed to hire", image: insightSpeed, copy: "Pre-vetted shortlists from a 500,000+ profile database shorten the path from requisition to start date." },
+  { title: "Speed to hire", image: insightSpeed, copy: "Pre-vetted shortlists from a 50,000+ professional database shorten the path from requisition to start date." },
   { title: "Candidate quality", image: insightQuality, copy: "Skills, certifications, and clearances are verified before a candidate ever reaches your team." },
   { title: "Cost control", image: insightSavings, copy: "Flexible contracts, pricing, and payment terms, with vendor consolidation that removes waste." },
   { title: "Employer brand", image: insightBrand, copy: "A consistent, respectful candidate experience that reflects well on your organization." },

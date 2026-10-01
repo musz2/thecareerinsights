@@ -34,7 +34,7 @@ export const contactInfo = {
 };
 
 export const impactStats = [
-  { value: 15, suffix: "K+", label: "Professionals Helped", ring: 88, decimals: 0 },
+  { value: 13, suffix: "K+", label: "Placed at Client Side", ring: 88, decimals: 0 },
   { value: 95, suffix: "%", label: "Success Rate", ring: 95, decimals: 0 },
   { value: 4.9, suffix: "", label: "Average Rating", ring: 98, decimals: 1 },
   { value: 300, suffix: "%", label: "Career Growth", ring: 80, decimals: 0 }
@@ -228,5 +228,6 @@ export const partners: Partner[] = [
   { name: "Cognizant", logo: "/partners/cognizant.svg", width: 162, height: 29 },
   { name: "Amazon Web Services", logo: "/partners/aws.svg", width: 77, height: 46 },
   { name: "Google Cloud", logo: "/partners/google-cloud.svg", width: 158, height: 29 },
-  { name: "Capgemini", logo: "/partners/capgemini.svg", width: 141, height: 33 }
+  { name: "Capgemini", logo: "/partners/capgemini.svg", width: 141, height: 33 },
+  { name: "Relief Safety Group", logo: "/partners/relief-safety.svg", width: 130, height: 37 }
 ];
